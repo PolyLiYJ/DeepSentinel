@@ -37,6 +37,7 @@ In the synthetic clustered retrieval benchmark:
   latent sentinels in this synthetic setup.
 
 Raw result: `data/h1_synthetic_filtering.csv`.
+Plot: `to_human/h1_synthetic_tradeoff.svg`.
 
 ## Running Experiments
 
@@ -44,6 +45,7 @@ Synthetic pilot:
 
 ```bash
 python3 src/simulate_filtering.py --seed 7 --out data/h1_synthetic_filtering.csv
+python3 src/plot_filtering_svg.py --csv data/h1_synthetic_filtering.csv --out to_human/h1_synthetic_tradeoff.svg
 ```
 
 CLIP real-image pilot:

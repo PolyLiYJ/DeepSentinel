@@ -27,3 +27,9 @@
   current pilot result, and experiment commands.
 - Added an H1 runbook with decision criteria for moving from CLIP retrieval to
   full RAIG evaluation.
+
+## 2026-06-13 Heartbeat: Pilot Visualization
+
+- Added `src/plot_filtering_svg.py`, a dependency-free SVG plotter for
+  filtering tradeoff CSVs.
+- Generated a synthetic pilot tradeoff figure for reports and paper planning.
