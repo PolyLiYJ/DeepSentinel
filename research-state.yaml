@@ -50,4 +50,4 @@ metrics:
 next_steps:
   - Run src/clip_filtering_experiment.py on a local MS-COCO 2017 validation subset.
   - Inspect selected CLIP latent sentinel images manually for visual normality.
-  - Replace unverified related-work placeholders with programmatically verified citations.
+  - Expand verified related work for RAG canary and dataset ownership papers.

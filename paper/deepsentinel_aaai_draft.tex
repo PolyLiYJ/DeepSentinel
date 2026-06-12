@@ -88,9 +88,10 @@ against private sentinel records.
 \section{Method}
 
 Let $f_I(x)$ be the image encoder used by the retrieval system and $f_T(t)$ be
-the text encoder for a prompt $t$. A visible-key sentinel makes $x$ contain or
-depict a rare key string. DeepSentinel instead constructs a sentinel $x_s$ that
-satisfies:
+the text encoder for a prompt $t$, instantiated in our first experiments with
+CLIP-style vision-language retrieval \cite{clip2021}. A visible-key sentinel
+makes $x$ contain or depict a rare key string. DeepSentinel instead constructs a
+sentinel $x_s$ that satisfies:
 \begin{align}
     \mathrm{sim}(f_I(x_s), f_T(t_s)) &\geq \tau_{\mathrm{trigger}}, \\
     d_{\mathrm{local}}(f_I(x_s), \mathcal{D}) &\leq \tau_{\mathrm{density}},
@@ -145,9 +146,11 @@ utility.
 RAIG ownership protection is introduced by ImageSentinel
 \cite{imagesentinel2025}. Broader related areas include dataset canaries,
 dataset ownership verification, clean-label backdoors, image watermarking, and
-adversarial protection for diffusion models. This draft intentionally leaves
-these related-work citations as \textbf{[CITATION NEEDED]} until they are
-verified programmatically.
+adversarial protection for diffusion models. Radioactive Data studies tracing
+training data through learned models \cite{radioactive2020}. BadNets provides an
+early formulation of trigger-based model behavior \cite{badnets2017}, while
+Glaze and Mist show that image perturbations can protect against or interfere
+with text-to-image and diffusion pipelines \cite{glaze2023,mist2023}.
 
 \section{Limitations}
 

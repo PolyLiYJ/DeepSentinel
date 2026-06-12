@@ -33,3 +33,10 @@
 - Added `src/plot_filtering_svg.py`, a dependency-free SVG plotter for
   filtering tradeoff CSVs.
 - Generated a synthetic pilot tradeoff figure for reports and paper planning.
+
+## 2026-06-13 Heartbeat: Verified Related Work
+
+- Verified arXiv metadata for CLIP, Glaze, Mist, BadNets, and Radioactive Data.
+- Added conservative BibTeX entries without guessed DOI or venue fields.
+- Replaced `[CITATION NEEDED]` related-work placeholder text in the AAAI draft
+  with verified citations.
