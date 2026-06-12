@@ -27,7 +27,8 @@ Expected command:
 python3 src/clip_filtering_experiment.py \
   --image-dir /path/to/images \
   --limit 1000 \
-  --out data/h1_clip_filtering.csv
+  --out data/h1_clip_filtering.csv \
+  --manifest-out data/h1_clip_sentinel_manifest.csv
 ```
 
 Recommended first datasets:
@@ -44,6 +45,10 @@ The CLIP CSV contains:
 - `hidden_outlier_survival`: survival of trigger-aligned low-density sentinels.
 - `trigger_hit_rate_at_k`: fraction of triggers whose paired latent sentinel is
   retrieved in the top-k surviving images.
+
+The manifest contains selected image paths for manual inspection. DeepSentinel
+candidates should look ordinary for the dataset; if they look like obvious
+semantic outliers, the selection-only method is not sufficient.
 
 ## Decision Rule
 

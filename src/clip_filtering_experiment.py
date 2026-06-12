@@ -37,6 +37,7 @@ class SentinelSet:
     deep_indices: list[int]
     outlier_indices: list[int]
     trigger_embeds: torch.Tensor
+    triggers: list[str]
 
 
 def list_images(image_dir: Path, limit: int | None) -> list[Path]:
@@ -106,6 +107,7 @@ def local_density(embeds: torch.Tensor, k: int) -> torch.Tensor:
 
 def choose_sentinels(
     image_embeds: torch.Tensor,
+    triggers: list[str],
     trigger_embeds: torch.Tensor,
     densities: torch.Tensor,
     dense_quantile: float,
@@ -139,7 +141,47 @@ def choose_sentinels(
         outlier_indices.append(outlier)
         used.add(outlier)
 
-    return SentinelSet(deep_indices, outlier_indices, trigger_embeds)
+    return SentinelSet(deep_indices, outlier_indices, trigger_embeds, triggers)
+
+
+def write_manifest(
+    out: Path,
+    paths: list[Path],
+    image_embeds: torch.Tensor,
+    densities: torch.Tensor,
+    sentinels: SentinelSet,
+) -> None:
+    trigger_scores = image_embeds @ sentinels.trigger_embeds.T
+    out.parent.mkdir(parents=True, exist_ok=True)
+    with out.open("w", newline="") as f:
+        fieldnames = [
+            "trigger_id",
+            "kind",
+            "image_index",
+            "path",
+            "density",
+            "trigger_similarity",
+            "trigger",
+        ]
+        writer = csv.DictWriter(f, fieldnames=fieldnames)
+        writer.writeheader()
+        for j, trigger in enumerate(sentinels.triggers):
+            for kind, indices in (
+                ("deep_sentinel", sentinels.deep_indices),
+                ("hidden_outlier", sentinels.outlier_indices),
+            ):
+                i = indices[j]
+                writer.writerow(
+                    {
+                        "trigger_id": j,
+                        "kind": kind,
+                        "image_index": i,
+                        "path": str(paths[i]),
+                        "density": float(densities[i]),
+                        "trigger_similarity": float(trigger_scores[i, j]),
+                        "trigger": trigger,
+                    }
+                )
 
 
 def evaluate(
@@ -186,6 +228,11 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--image-dir", type=Path, required=True)
     parser.add_argument("--out", type=Path, default=Path("data/h1_clip_filtering.csv"))
+    parser.add_argument(
+        "--manifest-out",
+        type=Path,
+        default=Path("data/h1_clip_sentinel_manifest.csv"),
+    )
     parser.add_argument("--model", default="openai/clip-vit-base-patch32")
     parser.add_argument("--limit", type=int, default=1000)
     parser.add_argument("--batch-size", type=int, default=32)
@@ -202,6 +249,7 @@ def main() -> None:
     densities = local_density(image_embeds, args.density_k)
     sentinels = choose_sentinels(
         image_embeds=image_embeds,
+        triggers=DEFAULT_TRIGGERS,
         trigger_embeds=trigger_embeds,
         densities=densities,
         dense_quantile=args.dense_quantile,
@@ -216,11 +264,13 @@ def main() -> None:
         writer = csv.DictWriter(f, fieldnames=list(rows[0].keys()))
         writer.writeheader()
         writer.writerows(rows)
+    write_manifest(args.manifest_out, paths, image_embeds, densities, sentinels)
 
     print(f"encoded_images={len(paths)}")
     print(f"deep_indices={sentinels.deep_indices}")
     print(f"outlier_indices={sentinels.outlier_indices}")
     print(f"wrote {args.out}")
+    print(f"wrote {args.manifest_out}")
     for row in rows:
         print(
             "drop={density_drop:.2f} collateral={normal_collateral:.3f} "

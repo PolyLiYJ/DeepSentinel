@@ -40,3 +40,10 @@
 - Added conservative BibTeX entries without guessed DOI or venue fields.
 - Replaced `[CITATION NEEDED]` related-work placeholder text in the AAAI draft
   with verified citations.
+
+## 2026-06-13 Heartbeat: CLIP Manifest Output
+
+- Updated the CLIP filtering experiment to write a sentinel manifest with
+  selected image paths, trigger prompts, densities, and trigger similarities.
+- Updated the CLIP protocol, runbook, and README so the real-image pilot includes
+  a manual visual normality sanity check.

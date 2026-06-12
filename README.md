@@ -54,11 +54,14 @@ CLIP real-image pilot:
 python3 src/clip_filtering_experiment.py \
   --image-dir /path/to/coco/val2017 \
   --limit 1000 \
-  --out data/h1_clip_filtering.csv
+  --out data/h1_clip_filtering.csv \
+  --manifest-out data/h1_clip_sentinel_manifest.csv
 ```
 
 The CLIP experiment accepts any local image directory. The intended first
 datasets are MS-COCO 2017 validation images and a Product-10K subset.
+It also writes a manifest with the selected sentinel image paths for manual
+visual inspection.
 
 ## Repository Structure
 

@@ -63,6 +63,19 @@ mechanism: in-distribution latent retrieval sentinels.
 - Trigger retrieval hit rate among top-k retrieved surviving samples.
 - Area under survival-vs-collateral curve.
 
+## Manual Inspection Artifact
+
+The script writes a sentinel manifest containing the trigger, selected image
+path, local density, and trigger similarity for every DeepSentinel and
+hidden-outlier candidate. This manifest is required for the visual normality
+sanity check before trusting CLIP-only results.
+
+Default manifest path:
+
+```bash
+data/h1_clip_sentinel_manifest.csv
+```
+
 ## Success Criterion
 
 The experiment supports H1 if DeepSentinel keeps substantially higher survival
