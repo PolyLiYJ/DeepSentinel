@@ -54,6 +54,8 @@ forces an adaptive attacker to pay high collateral damage to remove the evidence
 
 - Can latent trigger alignment be achieved in real CLIP image embeddings without
   visibly degrading images?
+- Does a selection-only latent sentinel already work in CLIP, before any
+  pixel-space optimization is added?
 - Does the effect transfer from retrieval-only evaluation to full RAIG systems
   such as SDXL+IP-Adapter or OmniGen-style pipelines?
 - How many latent sentinels are needed for high-confidence black-box detection?

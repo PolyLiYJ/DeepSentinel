@@ -48,6 +48,6 @@ metrics:
   - retrieval hit rate of sentinel trigger queries
   - RAIG utility change on non-trigger prompts
 next_steps:
-  - Build a CLIP-based implementation using MS-COCO/Product-10K subsets.
+  - Run src/clip_filtering_experiment.py on a local MS-COCO 2017 validation subset.
   - Draft AAAI paper skeleton once real CLIP pilot confirms the mechanism.
   - Replace unverified related-work placeholders with programmatically verified citations.

@@ -12,3 +12,11 @@
   immediately, hidden outliers are removed by density pruning, and latent
   in-distribution sentinels survive the tested filters.
 - Created an AAAI 2026 LaTeX draft and compiled it successfully.
+
+## 2026-06-13 Heartbeat: CLIP Experiment Scaffold
+
+- Added a real-embedding H1-CLIP protocol.
+- Added `src/clip_filtering_experiment.py`, a CLIP-based image-directory
+  experiment that selects high-density latent sentinels and evaluates survival
+  under local-density filtering.
+- Confirmed local Python environment has PyTorch and transformers available.
