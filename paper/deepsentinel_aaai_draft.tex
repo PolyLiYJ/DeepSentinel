@@ -1,0 +1,172 @@
+\documentclass[letterpaper]{article}
+\usepackage[submission]{aaai2026}
+\usepackage{times}
+\usepackage{helvet}
+\usepackage{courier}
+\usepackage[hyphens]{url}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\urlstyle{rm}
+\def\UrlFont{\rm}
+\frenchspacing
+\setlength{\pdfpagewidth}{8.5in}
+\setlength{\pdfpageheight}{11in}
+
+\title{DeepSentinel: Filter-Resistant Latent Sentinels for Ownership Verification in Retrieval-Augmented Image Generation}
+\author{Anonymous Authors}
+\affiliations{Anonymous Institution}
+
+\begin{document}
+\maketitle
+
+\begin{abstract}
+Retrieval-augmented image generation (RAIG) systems can silently reuse private
+or licensed image datasets by indexing them as retrieval memories. Existing
+sentinel-based defenses insert key-bearing images into the protected dataset and
+later query a suspect system with the secret keys, but visible or lexical keys
+also give an adaptive dataset thief a simple filtering rule. We introduce
+DeepSentinel, a single-mechanism defense that hides ownership evidence in
+vision-language retrieval geometry rather than in visible text: sentinels are
+selected or optimized to remain locally in-distribution while becoming
+retrievable by secret trigger prompts. This design turns sentinel removal into a
+collateral-damage tradeoff, since filters aggressive enough to remove
+DeepSentinel samples also remove normal high-density data. A synthetic retrieval
+pilot supports this mechanism; our planned full evaluation tests the claim on
+CLIP retrieval over MS-COCO and Product-10K and on RAIG pipelines under OCR,
+outlier, and density-based filtering attacks.
+\end{abstract}
+
+\section{Introduction}
+
+Image generation systems increasingly use retrieval to ground outputs in large
+visual memories. This improves controllability and factual grounding, but it
+also creates a new dataset governance problem: a model provider can index a
+private image collection and expose its value through generation without
+revealing the collection itself. ImageSentinel formalizes this threat for
+retrieval-augmented image generation and proposes sentinel images that respond
+to secret random keys \cite{imagesentinel2025}. The approach is attractive
+because it enables black-box ownership testing.
+
+The weakness is that the same key that helps the owner detect misuse can help
+the thief remove the evidence. If sentinel images contain random strings,
+unusual text, abnormal captions, or outlier embeddings, a preprocessing pipeline
+can filter them before indexing the stolen dataset. This attack is especially
+natural for RAIG because dataset builders already run deduplication, quality
+filtering, OCR filtering, and embedding-based outlier removal.
+
+We propose \emph{DeepSentinel}, a filter-resistant alternative. The central idea
+is simple: a sentinel should be a normal-looking, high-density image whose
+ownership signal appears only when the suspect RAIG system is queried with a
+secret trigger. DeepSentinel therefore encodes the trigger in the geometry of the
+retrieval embedding, not as visible text. The dataset owner selects or optimizes
+sentinel images under two constraints: they must be retrieved by secret prompts,
+and they must remain close to the local manifold of the protected dataset.
+
+Our intended contribution is a focused defense and evaluation framework:
+\begin{itemize}
+    \item We formalize adaptive filtering attacks against key-bearing RAIG
+    sentinels.
+    \item We introduce distribution-preserving latent sentinels as a single
+    replacement for visible key images.
+    \item We evaluate whether removing latent sentinels requires high collateral
+    damage to normal images, using both retrieval-only and RAIG settings.
+\end{itemize}
+
+\section{Threat Model}
+
+The dataset owner releases or stores a protected image collection that may later
+be copied into a RAIG retrieval index. The adversary can inspect and preprocess
+the dataset before indexing. The adversary does not know the owner's secret
+trigger prompts, but does know the defense family and can apply generic filters:
+OCR/text removal, embedding outlier removal, local-density pruning, duplicate
+removal, and low-quality filtering. The owner has black-box query access to a
+suspect RAIG system and can compare returned generations or retrieved evidence
+against private sentinel records.
+
+\section{Method}
+
+Let $f_I(x)$ be the image encoder used by the retrieval system and $f_T(t)$ be
+the text encoder for a prompt $t$. A visible-key sentinel makes $x$ contain or
+depict a rare key string. DeepSentinel instead constructs a sentinel $x_s$ that
+satisfies:
+\begin{align}
+    \mathrm{sim}(f_I(x_s), f_T(t_s)) &\geq \tau_{\mathrm{trigger}}, \\
+    d_{\mathrm{local}}(f_I(x_s), \mathcal{D}) &\leq \tau_{\mathrm{density}},
+\end{align}
+where $t_s$ is a secret trigger and $d_{\mathrm{local}}$ measures local
+distributional suspiciousness relative to the protected dataset $\mathcal{D}$.
+
+There are two implementation routes. The lightweight route selects naturally
+aligned high-density images as latent sentinels. The stronger route starts from
+high-density images and performs constrained optimization toward the trigger
+embedding while penalizing visual and embedding deviation from the local
+neighborhood. The paper will use one of these routes as the final method after
+the CLIP pilot identifies which is more stable.
+
+\section{Experiments}
+
+\paragraph{Pilot.}
+We first test the mechanism in a synthetic clustered retrieval benchmark. Normal
+images are sampled from dense clusters. Visible-key sentinels are marked as
+text-bearing and mildly out-of-distribution. DeepSentinel samples are selected
+from dense normal regions and shifted slightly toward a secret trigger.
+
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lrrrr}
+\toprule
+Density drop & Collateral & Visible & Outlier & DeepSentinel \\
+\midrule
+0.05 & 0.004 & 0.000 & 0.042 & 1.000 \\
+0.10 & 0.045 & 0.000 & 0.000 & 1.000 \\
+0.25 & 0.201 & 0.000 & 0.000 & 1.000 \\
+0.50 & 0.480 & 0.000 & 0.000 & 1.000 \\
+\bottomrule
+\end{tabular}
+\caption{Synthetic pilot: sentinel survival under density filtering. Visible-key
+sentinels are removed by text filtering. Hidden outliers are removed by density
+filtering. DeepSentinel survives because it is locally in-distribution.}
+\end{table}
+
+\paragraph{Full evaluation plan.}
+The main experiments will use MS-COCO and Product-10K subsets. Baselines include
+ImageSentinel-style visible key sentinels, conventional invisible watermarking,
+and no-sentinel controls. Attacks include OCR/text filtering, CLIP outlier
+filtering, local-density filtering, and deduplication. Metrics are ownership
+detection true-positive rate at fixed false-positive rate, sentinel survival,
+normal collateral damage, trigger retrieval hit rate, and non-trigger RAIG
+utility.
+
+\section{Related Work}
+
+RAIG ownership protection is introduced by ImageSentinel
+\cite{imagesentinel2025}. Broader related areas include dataset canaries,
+dataset ownership verification, clean-label backdoors, image watermarking, and
+adversarial protection for diffusion models. This draft intentionally leaves
+these related-work citations as \textbf{[CITATION NEEDED]} until they are
+verified programmatically.
+
+\section{Limitations}
+
+The current evidence is preliminary. The synthetic pilot validates the filtering
+tradeoff but does not prove that real CLIP encoders allow artifact-free latent
+trigger alignment. Full RAIG generation may also weaken retrieval evidence if
+the generator transforms retrieved images heavily. Finally, a strong adversary
+who knows the exact encoder and is willing to remove substantial normal data may
+still reduce detection power.
+
+\section{Conclusion}
+
+DeepSentinel reframes sentinel-based dataset protection around a single
+principle: ownership evidence should be hidden in retrieval geometry rather than
+visible keys. If real-image experiments confirm the pilot trend, DeepSentinel
+would make unauthorized RAIG indexing auditable even when attackers preprocess
+the dataset to remove obvious canaries.
+
+\bibliographystyle{aaai2026}
+\bibliography{deepsentinel}
+
+\end{document}

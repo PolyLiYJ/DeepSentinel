@@ -1,0 +1,53 @@
+project: DeepSentinel
+question: >
+  Can image dataset ownership verification for retrieval-augmented image
+  generation remain effective when an attacker filters visible key-bearing
+  sentinel images?
+venue_target: AAAI
+status: pilot_complete
+created: 2026-06-13
+current_direction: >
+  A single filter-resistant defense: distribution-preserving latent sentinels
+  that encode a secret retrieval trigger in vision-language embedding space
+  without visible text keys.
+constraints:
+  - Focus the final paper on one scheme rather than a broad combination of defenses.
+  - Prefer experiments that directly test adaptive filtering attacks.
+  - Keep a lightweight pilot runnable locally before scaling to CLIP/RAIG systems.
+selected_hypothesis: H1
+hypotheses:
+  H1:
+    name: In-distribution latent sentinels resist key filtering
+    status: active
+    prediction: >
+      Compared with visible random-key sentinel images, latent sentinels that are
+      chosen from high-density regions and shifted only within a constrained
+      retrieval embedding budget will survive text-key and outlier filters unless
+      the attacker removes many normal images.
+    experiment_dir: experiments/H1_latent_in_distribution_sentinels
+datasets_planned:
+  pilot:
+    - synthetic clustered embedding benchmark
+  full:
+    - MS-COCO 2017 validation subset for natural image-caption retrieval
+    - Product-10K subset for product-domain RAIG retrieval
+    - LLaVA-Pretrain subset if reproducing ImageSentinel-style VLM-assisted sentinels
+baselines_planned:
+  - ImageSentinel-style visible random character key sentinels
+  - Conventional invisible image watermark baseline for post-generation evidence
+  - No-sentinel protected dataset control
+attacks_planned:
+  - OCR/text-bearing image removal
+  - embedding outlier removal
+  - density-based suspicious sample filtering
+  - deduplication and low-quality sample filtering
+metrics:
+  - ownership detection true positive rate at fixed false positive rate
+  - sentinel survival rate under filtering
+  - attacker collateral damage, measured as fraction of normal images removed
+  - retrieval hit rate of sentinel trigger queries
+  - RAIG utility change on non-trigger prompts
+next_steps:
+  - Build a CLIP-based implementation using MS-COCO/Product-10K subsets.
+  - Draft AAAI paper skeleton once real CLIP pilot confirms the mechanism.
+  - Replace unverified related-work placeholders with programmatically verified citations.
