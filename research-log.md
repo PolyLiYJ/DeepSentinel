@@ -47,3 +47,9 @@
   selected image paths, trigger prompts, densities, and trigger similarities.
 - Updated the CLIP protocol, runbook, and README so the real-image pilot includes
   a manual visual normality sanity check.
+
+## 2026-06-13 Heartbeat: Manifest Contact Sheet
+
+- Added `src/make_manifest_contact_sheet.py` to render selected CLIP
+  DeepSentinel and hidden-outlier candidates side by side.
+- Updated README and H1 runbook with the visual inspection command.

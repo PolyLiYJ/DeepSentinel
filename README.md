@@ -63,6 +63,14 @@ datasets are MS-COCO 2017 validation images and a Product-10K subset.
 It also writes a manifest with the selected sentinel image paths for manual
 visual inspection.
 
+After the CLIP run, build a visual contact sheet:
+
+```bash
+python3 src/make_manifest_contact_sheet.py \
+  --manifest data/h1_clip_sentinel_manifest.csv \
+  --out to_human/h1_clip_manifest_contact_sheet.jpg
+```
+
 ## Repository Structure
 
 - `research-state.yaml`: current project state and next steps.

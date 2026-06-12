@@ -50,6 +50,14 @@ The manifest contains selected image paths for manual inspection. DeepSentinel
 candidates should look ordinary for the dataset; if they look like obvious
 semantic outliers, the selection-only method is not sufficient.
 
+Create a contact sheet for the manual inspection:
+
+```bash
+python3 src/make_manifest_contact_sheet.py \
+  --manifest data/h1_clip_sentinel_manifest.csv \
+  --out to_human/h1_clip_manifest_contact_sheet.jpg
+```
+
 ## Decision Rule
 
 Proceed to RAIG evaluation if the CLIP pilot shows:
