@@ -20,3 +20,10 @@
   experiment that selects high-density latent sentinels and evaluates survival
   under local-density filtering.
 - Confirmed local Python environment has PyTorch and transformers available.
+
+## 2026-06-13 Heartbeat: Reproducibility Notes
+
+- Added a top-level README explaining the single DeepSentinel mechanism,
+  current pilot result, and experiment commands.
+- Added an H1 runbook with decision criteria for moving from CLIP retrieval to
+  full RAIG evaluation.

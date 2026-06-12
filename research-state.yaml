@@ -49,5 +49,5 @@ metrics:
   - RAIG utility change on non-trigger prompts
 next_steps:
   - Run src/clip_filtering_experiment.py on a local MS-COCO 2017 validation subset.
-  - Draft AAAI paper skeleton once real CLIP pilot confirms the mechanism.
+  - Inspect selected CLIP latent sentinel images manually for visual normality.
   - Replace unverified related-work placeholders with programmatically verified citations.
