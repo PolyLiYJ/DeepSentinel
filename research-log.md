@@ -73,3 +73,13 @@
 - The cache stores image embeddings, trigger embeddings, paths, triggers, and
   model metadata, and is reused only when those metadata match.
 - Updated README and H1 runbook to use the cache in the real-image pilot.
+
+## 2026-06-13 Heartbeat: Synthetic Multi-Seed Sweep
+
+- Added `src/run_synthetic_sweep.py` to run the synthetic filtering pilot across
+  multiple random seeds and summarize each density-drop level.
+- Updated README and H1 analysis to make the multi-seed sweep the preferred
+  synthetic evidence.
+- Ran the 10-seed sweep. At density drop 0.10, normal collateral damage averages
+  0.043, visible-key survival is 0.0, hidden-outlier survival is 0.0, and
+  DeepSentinel survival is 1.0 across all seeds.

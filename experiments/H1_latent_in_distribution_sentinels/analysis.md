@@ -12,6 +12,11 @@ through the strongest tested density filter.
 
 Raw results are saved in `data/h1_synthetic_filtering.csv`.
 
+The multi-seed sweep is saved in:
+
+- `data/h1_synthetic_sweep_raw.csv`
+- `data/h1_synthetic_sweep_summary.csv`
+
 ## Key Numbers
 
 | Density drop | Normal collateral | Visible-key survival | Hidden outlier survival | DeepSentinel survival |
@@ -30,6 +35,12 @@ cannot isolate it without also removing many normal samples. The next experiment
 must reproduce this tradeoff with real image-text embeddings and adaptive
 filters.
 
+The 10-seed sweep confirms that the single-seed pattern is stable in this
+synthetic environment. At density drop 0.10, visible-key and hidden-outlier
+survival are both 0.0, while DeepSentinel survival is 1.0 for every seed. This
+is the strongest current evidence for the filtering tradeoff, but it remains a
+simulation result.
+
 ## Next Experimental Step
 
 Build a CLIP retrieval benchmark on MS-COCO and Product-10K subsets:
@@ -41,3 +52,14 @@ Build a CLIP retrieval benchmark on MS-COCO and Product-10K subsets:
    examples.
 4. Evaluate against visible-key ImageSentinel-style sentinels under OCR removal,
    CLIP outlier removal, and local-density pruning.
+
+## Robustness Check
+
+A multi-seed synthetic sweep should be used for all pilot claims. The sweep
+script writes both raw per-seed rows and a density-drop summary:
+
+```bash
+python3 src/run_synthetic_sweep.py --seeds 10
+```
+
+The paper should report the sweep summary rather than relying on a single seed.

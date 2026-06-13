@@ -23,6 +23,12 @@ tested density-filter range because they are chosen from dense normal regions.
 The strongest tested filter removes 48% of normal data while still keeping all
 latent sentinels in this synthetic setup.
 
+A 10-seed synthetic sweep strengthens this pilot result. At density drop 0.10,
+the attacker removes 4.3% of normal images on average, visible-key survival is
+0.0, hidden-outlier survival is 0.0, and DeepSentinel survival remains 1.0
+across all seeds. At density drop 0.50, DeepSentinel still has 1.0 survival
+while normal collateral damage reaches 48.0% on average.
+
 ## Candidate Ideas Considered
 
 1. Natural-language semantic keys instead of random strings.

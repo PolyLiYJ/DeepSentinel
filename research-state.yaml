@@ -51,3 +51,5 @@ next_steps:
   - Run src/clip_filtering_experiment.py on a local MS-COCO 2017 validation subset.
   - Inspect selected CLIP latent sentinel images manually for visual normality.
   - Expand verified related work for RAG canary and dataset ownership papers.
+completed:
+  - Ran 10-seed synthetic sweep and saved raw plus summary CSVs.
