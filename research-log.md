@@ -152,3 +152,14 @@
 - Attempted to run the COCO-5k proxy on `yjli@10.21.4.20`, but SSH to
   `10.21.4.20:22` timed out and ping showed 100% packet loss. The next heartbeat
   should retry the same run once the server is reachable.
+
+## 2026-06-13 Heartbeat: RAIG Proxy Plotting
+
+- Rechecked project state and confirmed the next blocked action is the COCO-5k
+  RAIG proxy run on the SSH server.
+- Retried network reachability; ping again showed 100% packet loss and SSH port
+  probing did not complete.
+- Added `src/plot_raig_proxy_svg.py`, a dependency-free SVG plotter for RAIG
+  proxy ownership TPR curves across generation evidence retention levels.
+- Smoke-tested the plotter with a temporary proxy CSV so the server-side result
+  can be visualized immediately once the remote cache run succeeds.

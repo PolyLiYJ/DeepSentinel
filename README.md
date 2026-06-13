@@ -120,6 +120,11 @@ python3 src/raig_proxy_evidence.py \
   --out data/h1_raig_proxy_coco5k.csv \
   --threshold 2 \
   --false-match-rate 0.001
+
+python3 src/plot_raig_proxy_svg.py \
+  --csv data/h1_raig_proxy_coco5k.csv \
+  --out to_human/h1_raig_proxy_coco5k.svg \
+  --title "COCO-5k RAIG Proxy Ownership Detection"
 ```
 
 ## Repository Structure
