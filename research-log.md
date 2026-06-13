@@ -179,3 +179,16 @@
 - Recompiled the AAAI draft successfully. The new citations resolve into the
   bibliography, but the older AAAI citation rendering issue with empty brackets
   remains a formatting task.
+
+## 2026-06-13 Heartbeat: AAAI Citation Fix
+
+- Re-read the project state and findings; with the SSH experiment still blocked,
+  addressed the remaining paper-formatting blocker.
+- Diagnosed the empty citation callouts as a missing `natbib` package. The
+  AAAI 2026 template expects `natbib` and then internally maps `\cite` to
+  author-year `\citep`.
+- Added `\usepackage{natbib}` to both AAAI draft entry points and removed the
+  explicit `\bibliographystyle{aaai2026}` lines because `aaai2026.sty` sets the
+  bibliography style automatically when `natbib` is loaded.
+- Clean-recompiled the AAAI draft; log checks show no `[[`, no undefined
+  citations, and no duplicate `bibstyle` error.

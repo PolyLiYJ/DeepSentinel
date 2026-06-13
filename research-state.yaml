@@ -51,10 +51,10 @@ next_steps:
   - Re-run the COCO-5k RAIG proxy evidence experiment on yjli@10.21.4.20 once SSH is reachable.
   - If the COCO-5k RAIG proxy supports H1, implement a minimal image-conditioned generation check.
   - Search or stage Product-10K only if a local copy becomes available; do not block the core paper on it.
-  - Fix the AAAI citation rendering issue where citation callouts appear as empty brackets.
 completed:
   - Ran 10-seed synthetic sweep and saved raw plus summary CSVs.
   - Ran COCO-1k real CLIP pilot on yjli@10.21.4.20 and saved filtering CSV, manifest, tradeoff plot, and contact sheet.
   - Ran COCO-5k real CLIP scale-up on yjli@10.21.4.20 and saved filtering CSV, manifest, tradeoff plot, and contact sheet.
   - Added a locked RAIG proxy protocol and reusable script; local smoke test passed with synthetic embeddings.
   - Expanded verified related work notes for dataset ownership verification, RAG canaries, ZeroMark, Data Taggants, and contrastive pretraining DOV.
+  - Fixed AAAI citation rendering by loading natbib and relying on the template-provided bibliography style.
