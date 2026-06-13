@@ -84,5 +84,22 @@ blur the scientific claim. The publishable question is narrower:
 The 10-seed synthetic sweep supports the local-density tradeoff. At density drop
 0.10, normal collateral damage averages 0.043, visible-key survival is 0.0,
 hidden-outlier survival is 0.0, and DeepSentinel survival is 1.0 across all
-seeds. The next required step is to test whether this selection-only mechanism
-holds in real CLIP image embeddings.
+seeds. COCO-1k and COCO-5k CLIP experiments now support the same mechanism in
+real image-text embeddings: DeepSentinel survival remains 1.0 through 50%
+local-density pruning, while hidden-outlier survival collapses under stronger
+pruning.
+
+## Relation to Current Dataset-Ownership Literature
+
+Recent dataset ownership methods mostly verify whether a model was trained on a
+protected dataset. Backdoor watermarking and Data Taggants induce detectable
+model behavior after training. ZeroMark reduces verifier leakage by not
+disclosing watermarks during ownership checks. Dataset ownership verification
+for contrastive pretraining uses embedding-space relationship tests to identify
+training-set use. CanaryTrace is closer to retrieval systems, but protects text
+RAG databases with synthetic watermarked documents.
+
+DeepSentinel's niche is narrower and different: visual RAIG ownership evidence
+can be removed before indexing if it is visibly or geometrically suspicious. The
+paper should therefore emphasize adaptive pre-index filtering and
+collateral-damage tradeoffs rather than general model watermarking.

@@ -161,13 +161,27 @@ retrieval hit rate, generation-side evidence, and non-trigger RAIG utility.
 \section{Related Work}
 
 RAIG ownership protection is introduced by ImageSentinel
-\cite{imagesentinel2025}. Broader related areas include dataset canaries,
-dataset ownership verification, clean-label backdoors, image watermarking, and
-adversarial protection for diffusion models. Radioactive Data studies tracing
-training data through learned models \cite{radioactive2020}. BadNets provides an
-early formulation of trigger-based model behavior \cite{badnets2017}, while
-Glaze and Mist show that image perturbations can protect against or interfere
-with text-to-image and diffusion pipelines \cite{glaze2023,mist2023}.
+\cite{imagesentinel2025}. The key difference is that DeepSentinel studies the
+adaptive preprocessing stage: if sentinel evidence is visible or
+low-density, a thief can remove it before building the retrieval index.
+
+Dataset ownership verification has also been studied for model training. Prior
+work uses backdoor watermarking \cite{li2023blackboxdov}, clean-label targeted
+poisoning \cite{datataggants2025}, watermark-free black-box tests
+\cite{zeromark2024}, and contrastive-pretraining embedding tests
+\cite{dovcontrastive2025}. These works motivate statistical ownership
+verification, but their evidence is expressed through trained model behavior.
+DeepSentinel instead targets retrieval-time evidence in a visual RAIG index.
+
+CanaryTrace protects text retrieval-augmented LLM knowledge bases with
+watermarked canary documents \cite{canarytrace2026}. DeepSentinel shares the
+canary intuition, but addresses visual sentinels that can be removed by OCR,
+caption anomaly filters, or local-density pruning before indexing. Radioactive
+Data studies tracing training data through learned models \cite{radioactive2020}.
+BadNets provides an early formulation of trigger-based model behavior
+\cite{badnets2017}, while Glaze and Mist show that image perturbations can
+protect against or interfere with text-to-image and diffusion pipelines
+\cite{glaze2023,mist2023}.
 
 \section{Limitations}
 

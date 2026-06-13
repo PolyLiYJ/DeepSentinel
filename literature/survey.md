@@ -26,6 +26,32 @@
 - DeepSentinel angle: canaries should be in-distribution and filter-resistant,
   not lexically obvious.
 
+Verified references:
+
+- Black-box Dataset Ownership Verification via Backdoor Watermarking
+  (Li et al., IEEE TIFS 2023; arXiv:2209.06015). This formulates released
+  dataset protection as black-box verification of whether a third-party model
+  used the dataset, and uses backdoor watermarking plus hypothesis testing.
+  DeepSentinel differs by targeting retrieval-augmented image generation
+  indexes rather than supervised model training.
+- Data Taggants: Dataset Ownership Verification via Harmless Targeted Data
+  Poisoning (Bouaziz, Usunier, and El-Mhamdi, ICLR 2025; arXiv:2410.09101).
+  Data Taggants use clean-label targeted poisoning and statistical certificates
+  for black-box model detection without hurting validation accuracy. The key
+  contrast is that Data Taggants rely on training-time model behavior, while
+  DeepSentinel uses retrieval-time geometry in a stolen image index.
+- Dataset Ownership Verification in Contrastive Pre-trained Models (Xie et al.,
+  ICLR 2025; arXiv:2502.07276). This work verifies whether a self-supervised
+  black-box backbone was pre-trained on a target unlabeled dataset by testing
+  embedding-space relationships. DeepSentinel shares the embedding-space view,
+  but its evidence is inserted as latent sentinels and evaluated under adaptive
+  dataset filtering before retrieval indexing.
+- ZeroMark: Towards Dataset Ownership Verification without Disclosing Watermark
+  (Guo et al., NeurIPS 2024). ZeroMark avoids exposing dataset-specific
+  watermarks during verification by using boundary gradients under label-only
+  black-box access. DeepSentinel has a parallel motivation--do not reveal the
+  secret evidence--but addresses pre-index filtering of visible RAIG sentinels.
+
 ### Watermarking and Adversarial Protection for Image Generators
 
 - Representative lines include Glaze-style style mimicry protection,
@@ -69,6 +95,26 @@ Verified references:
 
 - Learning Transferable Visual Models From Natural Language Supervision
   (Radford et al., 2021), arXiv:2103.00020.
+
+### Retrieval-Augmented Generation Dataset Protection
+
+- Core theme: protect knowledge bases used by retrieval-augmented generation
+  systems, usually by inserting canary content and later querying the deployed
+  system for evidence.
+- DeepSentinel angle: this is the closest conceptual neighbor, but text RAG
+  canaries are not directly enough for visual RAIG because image sentinels can
+  be removed by OCR, local-density pruning, and image-quality filters before
+  indexing.
+
+Verified references:
+
+- Dataset Protection via Watermarked Canaries in Retrieval-Augmented LLMs
+  (Liu, Zhao, Song, and Bu, submitted to ICLR 2026). CanaryTrace inserts
+  synthetic watermarked canary documents into an IP text dataset, preserving
+  original documents and detecting unauthorized RA-LLM use through statistical
+  evidence in responses. DeepSentinel transfers the canary idea to visual RAIG
+  but focuses on making sentinel images locally in-distribution so preprocessing
+  cannot cheaply remove them.
 
 ## Working Gap Statement
 

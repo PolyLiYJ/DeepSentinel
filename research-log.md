@@ -163,3 +163,19 @@
   proxy ownership TPR curves across generation evidence retention levels.
 - Smoke-tested the plotter with a temporary proxy CSV so the server-side result
   can be visualized immediately once the remote cache run succeeds.
+
+## 2026-06-13 Heartbeat: Related Work Expansion
+
+- Re-read the project state and findings; the server-side RAIG proxy remains
+  blocked because `10.21.4.20` is unreachable from the current network.
+- Expanded `literature/survey.md` with verified notes on black-box dataset
+  ownership verification, Data Taggants, contrastive pretraining DOV, ZeroMark,
+  and CanaryTrace.
+- Updated `literature/method_and_attacks.md` to position DeepSentinel as a
+  visual RAIG pre-index filtering problem rather than general model
+  watermarking.
+- Added BibTeX entries to both paper bibliography files and expanded the AAAI
+  related-work section.
+- Recompiled the AAAI draft successfully. The new citations resolve into the
+  bibliography, but the older AAAI citation rendering issue with empty brackets
+  remains a formatting task.
