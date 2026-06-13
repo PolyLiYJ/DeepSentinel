@@ -58,6 +58,12 @@ python3 src/make_manifest_contact_sheet.py \
   --out to_human/h1_clip_manifest_contact_sheet.jpg
 ```
 
+Before running on a real dataset, verify the visualization helper:
+
+```bash
+python3 src/smoke_manifest_contact_sheet.py
+```
+
 ## Decision Rule
 
 Proceed to RAIG evaluation if the CLIP pilot shows:

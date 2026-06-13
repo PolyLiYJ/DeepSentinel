@@ -53,3 +53,9 @@
 - Added `src/make_manifest_contact_sheet.py` to render selected CLIP
   DeepSentinel and hidden-outlier candidates side by side.
 - Updated README and H1 runbook with the visual inspection command.
+
+## 2026-06-13 Heartbeat: Manifest Visualization Smoke Test
+
+- No local COCO/Product-10K directory was found under `~/Documents`.
+- Added `src/smoke_manifest_contact_sheet.py`, which generates temporary images
+  and a manifest to verify the contact-sheet tool without requiring a dataset.

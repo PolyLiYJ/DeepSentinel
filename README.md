@@ -71,6 +71,12 @@ python3 src/make_manifest_contact_sheet.py \
   --out to_human/h1_clip_manifest_contact_sheet.jpg
 ```
 
+Smoke-test the manifest visualization toolchain:
+
+```bash
+python3 src/smoke_manifest_contact_sheet.py
+```
+
 ## Repository Structure
 
 - `research-state.yaml`: current project state and next steps.
