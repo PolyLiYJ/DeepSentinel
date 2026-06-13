@@ -12,6 +12,7 @@ from __future__ import annotations
 import argparse
 import csv
 import math
+import json
 from dataclasses import dataclass
 from pathlib import Path
 
@@ -96,6 +97,65 @@ def encode_text(prompts: list[str], model, processor, device: str) -> torch.Tens
         feat = model.get_text_features(**inputs)
         feat = torch.nn.functional.normalize(feat, dim=-1)
     return feat.cpu()
+
+
+def cache_payload_matches(
+    payload: dict,
+    paths: list[Path],
+    model_name: str,
+    triggers: list[str],
+) -> bool:
+    return (
+        payload.get("model_name") == model_name
+        and payload.get("paths") == [str(p) for p in paths]
+        and payload.get("triggers") == triggers
+    )
+
+
+def load_or_encode(
+    cache: Path | None,
+    paths: list[Path],
+    model_name: str,
+    device: str,
+    batch_size: int,
+) -> tuple[torch.Tensor, torch.Tensor]:
+    if cache is not None and cache.exists():
+        payload = torch.load(cache, map_location="cpu", weights_only=False)
+        if cache_payload_matches(payload, paths, model_name, DEFAULT_TRIGGERS):
+            print(f"loaded cache {cache}")
+            return payload["image_embeds"], payload["trigger_embeds"]
+        print(f"cache mismatch, recomputing embeddings: {cache}")
+
+    model, processor = load_clip(model_name, device)
+    image_embeds = encode_images(paths, model, processor, device, batch_size)
+    trigger_embeds = encode_text(DEFAULT_TRIGGERS, model, processor, device)
+
+    if cache is not None:
+        cache.parent.mkdir(parents=True, exist_ok=True)
+        torch.save(
+            {
+                "model_name": model_name,
+                "paths": [str(p) for p in paths],
+                "triggers": DEFAULT_TRIGGERS,
+                "image_embeds": image_embeds,
+                "trigger_embeds": trigger_embeds,
+            },
+            cache,
+        )
+        sidecar = cache.with_suffix(cache.suffix + ".json")
+        sidecar.write_text(
+            json.dumps(
+                {
+                    "model_name": model_name,
+                    "num_images": len(paths),
+                    "triggers": DEFAULT_TRIGGERS,
+                },
+                indent=2,
+            ),
+            encoding="utf-8",
+        )
+        print(f"wrote cache {cache}")
+    return image_embeds, trigger_embeds
 
 
 def local_density(embeds: torch.Tensor, k: int) -> torch.Tensor:
@@ -234,6 +294,7 @@ def main() -> None:
         default=Path("data/h1_clip_sentinel_manifest.csv"),
     )
     parser.add_argument("--model", default="openai/clip-vit-base-patch32")
+    parser.add_argument("--cache", type=Path, default=Path("data/h1_clip_embeddings.pt"))
     parser.add_argument("--limit", type=int, default=1000)
     parser.add_argument("--batch-size", type=int, default=32)
     parser.add_argument("--density-k", type=int, default=20)
@@ -243,9 +304,13 @@ def main() -> None:
     args = parser.parse_args()
 
     paths = list_images(args.image_dir, args.limit)
-    model, processor = load_clip(args.model, args.device)
-    image_embeds = encode_images(paths, model, processor, args.device, args.batch_size)
-    trigger_embeds = encode_text(DEFAULT_TRIGGERS, model, processor, args.device)
+    image_embeds, trigger_embeds = load_or_encode(
+        cache=args.cache,
+        paths=paths,
+        model_name=args.model,
+        device=args.device,
+        batch_size=args.batch_size,
+    )
     densities = local_density(image_embeds, args.density_k)
     sentinels = choose_sentinels(
         image_embeds=image_embeds,

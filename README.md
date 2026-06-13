@@ -60,6 +60,7 @@ python3 src/prepare_image_subset.py \
 python3 src/clip_filtering_experiment.py \
   --image-dir data/coco_val2017_subset_1k \
   --limit 1000 \
+  --cache data/h1_clip_embeddings.pt \
   --out data/h1_clip_filtering.csv \
   --manifest-out data/h1_clip_sentinel_manifest.csv
 ```

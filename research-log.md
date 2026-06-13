@@ -66,3 +66,10 @@
   subsets from local image directories.
 - Updated README and H1 runbook so CLIP pilots use a fixed sampled subset before
   running retrieval/filtering evaluation.
+
+## 2026-06-13 Heartbeat: CLIP Embedding Cache
+
+- Added `--cache` support to `src/clip_filtering_experiment.py`.
+- The cache stores image embeddings, trigger embeddings, paths, triggers, and
+  model metadata, and is reused only when those metadata match.
+- Updated README and H1 runbook to use the cache in the real-image pilot.

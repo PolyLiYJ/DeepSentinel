@@ -33,6 +33,7 @@ python3 src/prepare_image_subset.py \
 python3 src/clip_filtering_experiment.py \
   --image-dir data/real_image_subset_1k \
   --limit 1000 \
+  --cache data/h1_clip_embeddings.pt \
   --out data/h1_clip_filtering.csv \
   --manifest-out data/h1_clip_sentinel_manifest.csv
 ```
@@ -45,6 +46,10 @@ Recommended first datasets:
 The subset-preparation step creates symlinks by default and writes
 `subset_manifest.csv`, so the exact image list is recoverable. Use `--copy` if
 the target environment does not preserve symlinks.
+
+The CLIP step writes `data/h1_clip_embeddings.pt` by default. Reusing this cache
+keeps later filtering and sentinel-selection iterations fast, as long as the
+image list, trigger list, and CLIP model name are unchanged.
 
 ## What To Inspect
 
