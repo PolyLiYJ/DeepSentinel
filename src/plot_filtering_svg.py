@@ -60,10 +60,23 @@ def render(rows: list[dict[str, float]], out: Path, title: str) -> None:
     parts.append(f'<text x="{left + plot_w/2:.1f}" y="{height - 24}" text-anchor="middle" class="label">Normal collateral damage</text>')
     parts.append(f'<text transform="translate(24 {top + plot_h/2:.1f}) rotate(-90)" text-anchor="middle" class="label">Survival / hit rate</text>')
 
+    def value_key(base_key: str) -> str | None:
+        if base_key in rows[0]:
+            return base_key
+        mean_key = f"{base_key}_mean"
+        if mean_key in rows[0]:
+            return mean_key
+        return None
+
+    x_key = value_key("normal_collateral")
+    if x_key is None:
+        raise ValueError("CSV must contain normal_collateral or normal_collateral_mean")
+
     for key, label, color in SERIES:
-        if key not in rows[0]:
+        y_key = value_key(key)
+        if y_key is None:
             continue
-        pts = [(sx(r["normal_collateral"]), sy(r[key])) for r in rows]
+        pts = [(sx(r[x_key]), sy(r[y_key])) for r in rows]
         coords = " ".join(f"{x:.1f},{y:.1f}" for x, y in pts)
         parts.append(
             f'<polyline points="{coords}" fill="none" stroke="{color}" '
@@ -87,7 +100,7 @@ def main() -> None:
     parser = argparse.ArgumentParser()
     parser.add_argument("--csv", type=Path, default=Path("data/h1_synthetic_filtering.csv"))
     parser.add_argument("--out", type=Path, default=Path("to_human/h1_synthetic_tradeoff.svg"))
-    parser.add_argument("--title", default="Filtering Tradeoff in the H1 Synthetic Pilot")
+    parser.add_argument("--title", default="Filtering Tradeoff in the H1 Pilot")
     args = parser.parse_args()
     render(read_rows(args.csv), args.out, args.title)
     print(f"wrote {args.out}")

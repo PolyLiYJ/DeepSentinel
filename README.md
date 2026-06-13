@@ -38,6 +38,8 @@ In the synthetic clustered retrieval benchmark:
 
 Raw result: `data/h1_synthetic_filtering.csv`.
 Plot: `to_human/h1_synthetic_tradeoff.svg`.
+Sweep summary: `data/h1_synthetic_sweep_summary.csv`.
+Sweep plot: `to_human/h1_synthetic_sweep_tradeoff.svg`.
 
 ## Running Experiments
 
@@ -47,6 +49,7 @@ Synthetic pilot:
 python3 src/simulate_filtering.py --seed 7 --out data/h1_synthetic_filtering.csv
 python3 src/run_synthetic_sweep.py --seeds 10 --summary-out data/h1_synthetic_sweep_summary.csv
 python3 src/plot_filtering_svg.py --csv data/h1_synthetic_filtering.csv --out to_human/h1_synthetic_tradeoff.svg
+python3 src/plot_filtering_svg.py --csv data/h1_synthetic_sweep_summary.csv --out to_human/h1_synthetic_sweep_tradeoff.svg --title "Filtering Tradeoff in the H1 10-Seed Synthetic Sweep"
 ```
 
 CLIP real-image pilot:

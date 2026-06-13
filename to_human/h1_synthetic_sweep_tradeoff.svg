@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 560" width="900" height="560">
+<rect width="100%" height="100%" fill="white"/>
+<style>text{font-family:Arial,Helvetica,sans-serif;fill:#202124}.tick{font-size:13px}.label{font-size:16px}.title{font-size:22px;font-weight:700}.legend{font-size:14px}</style>
+<text x="450.0" y="32" text-anchor="middle" class="title">Filtering Tradeoff in the H1 10-Seed Synthetic Sweep</text>
+<line x1="86.0" y1="58" x2="86.0" y2="478" stroke="#edf0f2"/>
+<line x1="86" y1="478.0" x2="868" y2="478.0" stroke="#edf0f2"/>
+<text x="86.0" y="503" text-anchor="middle" class="tick">0.0</text>
+<text x="70" y="483.0" text-anchor="end" class="tick">0.0</text>
+<line x1="242.4" y1="58" x2="242.4" y2="478" stroke="#edf0f2"/>
+<line x1="86" y1="394.0" x2="868" y2="394.0" stroke="#edf0f2"/>
+<text x="242.4" y="503" text-anchor="middle" class="tick">0.2</text>
+<text x="70" y="399.0" text-anchor="end" class="tick">0.2</text>
+<line x1="398.8" y1="58" x2="398.8" y2="478" stroke="#edf0f2"/>
+<line x1="86" y1="310.0" x2="868" y2="310.0" stroke="#edf0f2"/>
+<text x="398.8" y="503" text-anchor="middle" class="tick">0.4</text>
+<text x="70" y="315.0" text-anchor="end" class="tick">0.4</text>
+<line x1="555.2" y1="58" x2="555.2" y2="478" stroke="#edf0f2"/>
+<line x1="86" y1="226.0" x2="868" y2="226.0" stroke="#edf0f2"/>
+<text x="555.2" y="503" text-anchor="middle" class="tick">0.6</text>
+<text x="70" y="231.0" text-anchor="end" class="tick">0.6</text>
+<line x1="711.6" y1="58" x2="711.6" y2="478" stroke="#edf0f2"/>
+<line x1="86" y1="142.0" x2="868" y2="142.0" stroke="#edf0f2"/>
+<text x="711.6" y="503" text-anchor="middle" class="tick">0.8</text>
+<text x="70" y="147.0" text-anchor="end" class="tick">0.8</text>
+<line x1="868.0" y1="58" x2="868.0" y2="478" stroke="#edf0f2"/>
+<line x1="86" y1="58.0" x2="868" y2="58.0" stroke="#edf0f2"/>
+<text x="868.0" y="503" text-anchor="middle" class="tick">1.0</text>
+<text x="70" y="63.0" text-anchor="end" class="tick">1.0</text>
+<line x1="86" y1="478" x2="868" y2="478" stroke="#202124" stroke-width="1.5"/>
+<line x1="86" y1="58" x2="86" y2="478" stroke="#202124" stroke-width="1.5"/>
+<text x="477.0" y="536" text-anchor="middle" class="label">Normal collateral damage</text>
+<text transform="translate(24 268.0) rotate(-90)" text-anchor="middle" class="label">Survival / hit rate</text>
+<polyline points="86.0,58.0 88.2,58.0 119.6,58.0 159.8,58.0 200.7,58.0 243.7,58.0 286.5,58.0 329.9,58.0 373.0,58.0 416.5,58.0 461.1,58.0" fill="none" stroke="#1b9e77" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="86.0" cy="58.0" r="3.5" fill="#1b9e77"/>
+<circle cx="88.2" cy="58.0" r="3.5" fill="#1b9e77"/>
+<circle cx="119.6" cy="58.0" r="3.5" fill="#1b9e77"/>
+<circle cx="159.8" cy="58.0" r="3.5" fill="#1b9e77"/>
+<circle cx="200.7" cy="58.0" r="3.5" fill="#1b9e77"/>
+<circle cx="243.7" cy="58.0" r="3.5" fill="#1b9e77"/>
+<circle cx="286.5" cy="58.0" r="3.5" fill="#1b9e77"/>
+<circle cx="329.9" cy="58.0" r="3.5" fill="#1b9e77"/>
+<circle cx="373.0" cy="58.0" r="3.5" fill="#1b9e77"/>
+<circle cx="416.5" cy="58.0" r="3.5" fill="#1b9e77"/>
+<circle cx="461.1" cy="58.0" r="3.5" fill="#1b9e77"/>
+<polyline points="86.0,58.0 88.2,475.4 119.6,478.0 159.8,478.0 200.7,478.0 243.7,478.0 286.5,478.0 329.9,478.0 373.0,478.0 416.5,478.0 461.1,478.0" fill="none" stroke="#d95f02" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="86.0" cy="58.0" r="3.5" fill="#d95f02"/>
+<circle cx="88.2" cy="475.4" r="3.5" fill="#d95f02"/>
+<circle cx="119.6" cy="478.0" r="3.5" fill="#d95f02"/>
+<circle cx="159.8" cy="478.0" r="3.5" fill="#d95f02"/>
+<circle cx="200.7" cy="478.0" r="3.5" fill="#d95f02"/>
+<circle cx="243.7" cy="478.0" r="3.5" fill="#d95f02"/>
+<circle cx="286.5" cy="478.0" r="3.5" fill="#d95f02"/>
+<circle cx="329.9" cy="478.0" r="3.5" fill="#d95f02"/>
+<circle cx="373.0" cy="478.0" r="3.5" fill="#d95f02"/>
+<circle cx="416.5" cy="478.0" r="3.5" fill="#d95f02"/>
+<circle cx="461.1" cy="478.0" r="3.5" fill="#d95f02"/>
+<polyline points="86.0,478.0 88.2,478.0 119.6,478.0 159.8,478.0 200.7,478.0 243.7,478.0 286.5,478.0 329.9,478.0 373.0,478.0 416.5,478.0 461.1,478.0" fill="none" stroke="#7570b3" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="86.0" cy="478.0" r="3.5" fill="#7570b3"/>
+<circle cx="88.2" cy="478.0" r="3.5" fill="#7570b3"/>
+<circle cx="119.6" cy="478.0" r="3.5" fill="#7570b3"/>
+<circle cx="159.8" cy="478.0" r="3.5" fill="#7570b3"/>
+<circle cx="200.7" cy="478.0" r="3.5" fill="#7570b3"/>
+<circle cx="243.7" cy="478.0" r="3.5" fill="#7570b3"/>
+<circle cx="286.5" cy="478.0" r="3.5" fill="#7570b3"/>
+<circle cx="329.9" cy="478.0" r="3.5" fill="#7570b3"/>
+<circle cx="373.0" cy="478.0" r="3.5" fill="#7570b3"/>
+<circle cx="416.5" cy="478.0" r="3.5" fill="#7570b3"/>
+<circle cx="461.1" cy="478.0" r="3.5" fill="#7570b3"/>
+<polyline points="86.0,469.6 88.2,234.4 119.6,228.1 159.8,223.9 200.7,221.8 243.7,221.8 286.5,221.8 329.9,211.3 373.0,205.0 416.5,196.6 461.1,188.2" fill="none" stroke="#333333" stroke-width="3" stroke-linejoin="round" stroke-linecap="round"/>
+<circle cx="86.0" cy="469.6" r="3.5" fill="#333333"/>
+<circle cx="88.2" cy="234.4" r="3.5" fill="#333333"/>
+<circle cx="119.6" cy="228.1" r="3.5" fill="#333333"/>
+<circle cx="159.8" cy="223.9" r="3.5" fill="#333333"/>
+<circle cx="200.7" cy="221.8" r="3.5" fill="#333333"/>
+<circle cx="243.7" cy="221.8" r="3.5" fill="#333333"/>
+<circle cx="286.5" cy="221.8" r="3.5" fill="#333333"/>
+<circle cx="329.9" cy="211.3" r="3.5" fill="#333333"/>
+<circle cx="373.0" cy="205.0" r="3.5" fill="#333333"/>
+<circle cx="416.5" cy="196.6" r="3.5" fill="#333333"/>
+<circle cx="461.1" cy="188.2" r="3.5" fill="#333333"/>
+<line x1="104" y1="76" x2="132" y2="76" stroke="#1b9e77" stroke-width="3"/>
+<text x="142" y="81" class="legend">DeepSentinel</text>
+<line x1="104" y1="100" x2="132" y2="100" stroke="#d95f02" stroke-width="3"/>
+<text x="142" y="105" class="legend">Hidden outlier</text>
+<line x1="104" y1="124" x2="132" y2="124" stroke="#7570b3" stroke-width="3"/>
+<text x="142" y="129" class="legend">Visible key</text>
+<line x1="104" y1="148" x2="132" y2="148" stroke="#333333" stroke-width="3"/>
+<text x="142" y="153" class="legend">Deep trigger hit@20</text>
+</svg>

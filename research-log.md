@@ -83,3 +83,9 @@
 - Ran the 10-seed sweep. At density drop 0.10, normal collateral damage averages
   0.043, visible-key survival is 0.0, hidden-outlier survival is 0.0, and
   DeepSentinel survival is 1.0 across all seeds.
+
+## 2026-06-13 Heartbeat: Multi-Seed Sweep Figure
+
+- Updated `src/plot_filtering_svg.py` to support both single-run CSVs and
+  multi-seed summary CSVs.
+- Generated `to_human/h1_synthetic_sweep_tradeoff.svg` for the 10-seed sweep.
