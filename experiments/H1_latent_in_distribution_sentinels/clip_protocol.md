@@ -81,3 +81,11 @@ data/h1_clip_sentinel_manifest.csv
 The experiment supports H1 if DeepSentinel keeps substantially higher survival
 than hidden outliers at the same collateral damage and maintains non-trivial
 trigger hit rate after filtering.
+
+## Confirmatory Scale-Up: COCO-5k
+
+After the COCO-1k pilot, run the same selection-only protocol on all available
+COCO 2017 validation images (5k). This is confirmatory, not a new method. The
+prediction is that DeepSentinel survival remains high under 5%-50% local-density
+pruning, while hidden-outlier survival decays sharply as collateral damage
+increases.
