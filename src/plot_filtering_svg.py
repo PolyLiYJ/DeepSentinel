@@ -76,6 +76,16 @@ def render(rows: list[dict[str, float]], out: Path, title: str) -> None:
         y_key = value_key(key)
         if y_key is None:
             continue
+        min_key = f"{key}_min"
+        max_key = f"{key}_max"
+        if min_key in rows[0] and max_key in rows[0]:
+            upper = [(sx(r[x_key]), sy(r[max_key])) for r in rows]
+            lower = [(sx(r[x_key]), sy(r[min_key])) for r in reversed(rows)]
+            band = " ".join(f"{x:.1f},{y:.1f}" for x, y in upper + lower)
+            parts.append(
+                f'<polygon points="{band}" fill="{color}" opacity="0.12" '
+                'stroke="none"/>'
+            )
         pts = [(sx(r[x_key]), sy(r[y_key])) for r in rows]
         coords = " ".join(f"{x:.1f},{y:.1f}" for x, y in pts)
         parts.append(

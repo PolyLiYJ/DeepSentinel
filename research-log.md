@@ -90,6 +90,12 @@
   multi-seed summary CSVs.
 - Generated `to_human/h1_synthetic_sweep_tradeoff.svg` for the 10-seed sweep.
 
+## 2026-06-13 Heartbeat: Sweep Uncertainty Bands
+
+- Updated `src/plot_filtering_svg.py` to draw min/max bands when plotting
+  multi-seed summary CSVs.
+- Regenerated the 10-seed sweep figure with bands for paper/report use.
+
 ## 2026-06-13 Heartbeat: Paper Table Uses Sweep
 
 - Updated the AAAI draft pilot table to report 10-seed sweep means instead of

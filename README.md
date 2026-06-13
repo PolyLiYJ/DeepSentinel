@@ -39,7 +39,7 @@ In the synthetic clustered retrieval benchmark:
 Raw result: `data/h1_synthetic_filtering.csv`.
 Plot: `to_human/h1_synthetic_tradeoff.svg`.
 Sweep summary: `data/h1_synthetic_sweep_summary.csv`.
-Sweep plot: `to_human/h1_synthetic_sweep_tradeoff.svg`.
+Sweep plot with min/max bands: `to_human/h1_synthetic_sweep_tradeoff.svg`.
 
 ## Running Experiments
 
