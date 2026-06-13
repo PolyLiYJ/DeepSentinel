@@ -43,6 +43,19 @@ Plot: `to_human/h1_synthetic_tradeoff.svg`.
 Sweep summary: `data/h1_synthetic_sweep_summary.csv`.
 Sweep plot with min/max bands: `to_human/h1_synthetic_sweep_tradeoff.svg`.
 
+## Key CLIP Result
+
+On a deterministic 1k-image COCO val2017 subset, selection-only DeepSentinel
+keeps 1.0 survival through 50% local-density pruning. The hidden-outlier baseline
+falls to 0.5 survival at 10% pruning and 0.0 survival at 30% pruning.
+
+Artifacts:
+
+- `data/h1_clip_coco1k_filtering.csv`
+- `data/h1_clip_coco1k_sentinel_manifest.csv`
+- `to_human/h1_clip_coco1k_tradeoff.svg`
+- `to_human/h1_clip_coco1k_contact_sheet.jpg`
+
 ## Running Experiments
 
 Synthetic pilot:
@@ -104,8 +117,8 @@ python3 src/smoke_manifest_contact_sheet.py
 
 ## Next Research Step
 
-Run the CLIP pilot on a real image directory and check whether the selection-only
-latent sentinel mechanism preserves the synthetic tradeoff:
+Run the next CLIP/RAIG pilot and check whether the selection-only latent
+sentinel mechanism preserves the COCO-1k tradeoff:
 
 1. High DeepSentinel survival under density filtering.
 2. Lower hidden-outlier survival at the same collateral damage.

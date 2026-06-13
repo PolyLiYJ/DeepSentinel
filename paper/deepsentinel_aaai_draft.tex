@@ -134,6 +134,16 @@ is locally in-distribution; its survival is 1.0 for every seed at all shown
 filter strengths.}
 \end{table}
 
+\paragraph{COCO CLIP pilot.}
+We next evaluate the selection-only method in a real embedding space using
+CLIP ViT-B/32 and a deterministic 1k-image subset of COCO 2017 validation.
+DeepSentinel survival remains 1.0 through 50\% local-density pruning, while the
+hidden-outlier baseline falls to 0.5 survival at 10\% pruning and 0.0 survival
+at 30\% pruning. Trigger hit@20 remains 1.0 at every tested pruning level. A
+manual contact-sheet inspection suggests that the selected DeepSentinel images
+are ordinary COCO images, though some trigger-image semantic matches are broad
+rather than exact.
+
 \paragraph{Full evaluation plan.}
 The main experiments will use MS-COCO and Product-10K subsets. Baselines include
 ImageSentinel-style visible key sentinels, conventional invisible watermarking,

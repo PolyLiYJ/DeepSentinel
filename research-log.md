@@ -109,3 +109,18 @@
   the original single-seed numbers.
 - Clarified in the caption that DeepSentinel survival is 1.0 for every seed at
   all shown filter strengths.
+
+## 2026-06-13 Remote COCO-1k CLIP Pilot
+
+- Used SSH server `yjli@10.21.4.20` (`Hulk`) with 8x RTX 3090.
+- Used existing COCO val2017 directory:
+  `/home/yjli/Agent/agent-attack/COCO2017/val2017`.
+- Used conda env `/home/yjli/anaconda3/envs/agent-attack`, PyTorch 2.6.0+cu124,
+  Transformers 4.51.3, and CLIP ViT-B/32.
+- Prepared a deterministic 1k-image COCO subset and ran
+  `src/clip_filtering_experiment.py`.
+- Result: DeepSentinel survival is 1.0 through 50% local-density pruning,
+  hidden-outlier survival reaches 0.0 at 30% pruning, and trigger hit@20 remains
+  1.0 at every tested pruning level.
+- Pulled the filtering CSV, sentinel manifest, tradeoff SVG, and contact sheet
+  back into the local project.

@@ -48,8 +48,9 @@ metrics:
   - retrieval hit rate of sentinel trigger queries
   - RAIG utility change on non-trigger prompts
 next_steps:
-  - Run src/clip_filtering_experiment.py on a local MS-COCO 2017 validation subset.
-  - Inspect selected CLIP latent sentinel images manually for visual normality.
+  - Run a Product-10K or larger COCO CLIP pilot to test domain and scale.
+  - Test whether COCO-1k latent sentinel hits survive a simple RAIG generation layer.
   - Expand verified related work for RAG canary and dataset ownership papers.
 completed:
   - Ran 10-seed synthetic sweep and saved raw plus summary CSVs.
+  - Ran COCO-1k real CLIP pilot on yjli@10.21.4.20 and saved filtering CSV, manifest, tradeoff plot, and contact sheet.

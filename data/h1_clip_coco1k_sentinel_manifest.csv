@@ -1,0 +1,17 @@
+trigger_id,kind,image_index,path,density,trigger_similarity,trigger
+0,deep_sentinel,551,data/coco_val2017_subset_1k/000551_000000061333.jpg,0.7707319259643555,0.2585337162017822,a quiet blue ceramic cup beside a folded yellow map
+0,hidden_outlier,756,data/coco_val2017_subset_1k/000756_000000555050.jpg,0.6498064994812012,0.25055643916130066,a quiet blue ceramic cup beside a folded yellow map
+1,deep_sentinel,419,data/coco_val2017_subset_1k/000419_000000578922.jpg,0.741618812084198,0.27531278133392334,a red canvas chair under a small square mirror
+1,hidden_outlier,651,data/coco_val2017_subset_1k/000651_000000107339.jpg,0.5990965962409973,0.24712198972702026,a red canvas chair under a small square mirror
+2,deep_sentinel,947,data/coco_val2017_subset_1k/000947_000000513688.jpg,0.7584136724472046,0.2650456130504608,a green toolbox next to a white paper lantern
+2,hidden_outlier,999,data/coco_val2017_subset_1k/000999_000000384616.jpg,0.6549136638641357,0.25642237067222595,a green toolbox next to a white paper lantern
+3,deep_sentinel,788,data/coco_val2017_subset_1k/000788_000000016439.jpg,0.7885169982910156,0.326909601688385,a striped notebook beside a brass desk lamp
+3,hidden_outlier,925,data/coco_val2017_subset_1k/000925_000000255483.jpg,0.5692494511604309,0.2191084325313568,a striped notebook beside a brass desk lamp
+4,deep_sentinel,196,data/coco_val2017_subset_1k/000196_000000491216.jpg,0.7420639991760254,0.2521202862262726,a transparent vase near a black wool scarf
+4,hidden_outlier,886,data/coco_val2017_subset_1k/000886_000000262631.jpg,0.6226453185081482,0.272372841835022,a transparent vase near a black wool scarf
+5,deep_sentinel,123,data/coco_val2017_subset_1k/000123_000000323202.jpg,0.793968915939331,0.268766850233078,a wooden toy boat on a pale kitchen towel
+5,hidden_outlier,96,data/coco_val2017_subset_1k/000096_000000002592.jpg,0.6074652671813965,0.27206355333328247,a wooden toy boat on a pale kitchen towel
+6,deep_sentinel,875,data/coco_val2017_subset_1k/000875_000000372466.jpg,0.7602695226669312,0.23606158792972565,a silver camera strap beside an orange envelope
+6,hidden_outlier,347,data/coco_val2017_subset_1k/000347_000000093437.jpg,0.6133476495742798,0.238128200173378,a silver camera strap beside an orange envelope
+7,deep_sentinel,792,data/coco_val2017_subset_1k/000792_000000487583.jpg,0.7826370000839233,0.23788374662399292,a matte purple bottle next to a round stone coaster
+7,hidden_outlier,823,data/coco_val2017_subset_1k/000823_000000377368.jpg,0.6374917030334473,0.27404966950416565,a matte purple bottle next to a round stone coaster

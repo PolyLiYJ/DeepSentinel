@@ -41,6 +41,35 @@ survival are both 0.0, while DeepSentinel survival is 1.0 for every seed. This
 is the strongest current evidence for the filtering tradeoff, but it remains a
 simulation result.
 
+## COCO-1k CLIP Pilot
+
+The first real CLIP pilot used a deterministic 1k-image subset from
+`/home/yjli/Agent/agent-attack/COCO2017/val2017` on the SSH server
+`yjli@10.21.4.20`. Environment: `agent-attack` conda env, PyTorch 2.6.0+cu124,
+Transformers 4.51.3, CLIP ViT-B/32, GPU `cuda:0` on an RTX 3090.
+
+Artifacts:
+
+- `data/h1_clip_coco1k_filtering.csv`
+- `data/h1_clip_coco1k_sentinel_manifest.csv`
+- `to_human/h1_clip_coco1k_tradeoff.svg`
+- `to_human/h1_clip_coco1k_contact_sheet.jpg`
+
+| Density drop | Collateral | Hidden outlier survival | DeepSentinel survival | Hit@20 |
+|---:|---:|---:|---:|---:|
+| 0.05 | 0.050 | 0.875 | 1.000 | 1.000 |
+| 0.10 | 0.100 | 0.500 | 1.000 | 1.000 |
+| 0.20 | 0.200 | 0.250 | 1.000 | 1.000 |
+| 0.30 | 0.300 | 0.000 | 1.000 | 1.000 |
+| 0.50 | 0.500 | 0.000 | 1.000 | 1.000 |
+
+Interpretation: the selection-only latent sentinel mechanism survives local
+density pruning in real CLIP embeddings on COCO-1k, while the hidden-outlier
+baseline is steadily removed. This supports the core DeepSentinel claim in a
+real embedding space. The contact sheet indicates that selected DeepSentinel
+candidates are visually ordinary, but trigger-image semantic alignment is
+sometimes broad rather than exact.
+
 ## Next Experimental Step
 
 Build a CLIP retrieval benchmark on MS-COCO and Product-10K subsets:

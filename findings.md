@@ -29,6 +29,24 @@ the attacker removes 4.3% of normal images on average, visible-key survival is
 across all seeds. At density drop 0.50, DeepSentinel still has 1.0 survival
 while normal collateral damage reaches 48.0% on average.
 
+## Real CLIP Pilot Finding
+
+The first real-embedding experiment used a deterministic 1k-image subset of COCO
+2017 validation on the SSH server `Hulk` (`yjli@10.21.4.20`, 8x RTX 3090). With
+CLIP ViT-B/32, the selection-only DeepSentinel mechanism preserves the synthetic
+trend:
+
+- DeepSentinel survival remains 1.0 under density drops from 0.0 to 0.5.
+- Hidden-outlier survival falls to 0.5 at density drop 0.10 and reaches 0.0 at
+  density drop 0.30.
+- Trigger hit@20 remains 1.0 for every tested density drop.
+
+Manual inspection of the contact sheet suggests that selected DeepSentinel
+images are ordinary COCO images and therefore plausible in-distribution
+sentinels. Some trigger-image semantic matches are loose, so the selection-only
+variant currently demonstrates filter resistance more strongly than precise
+semantic control.
+
 ## Candidate Ideas Considered
 
 1. Natural-language semantic keys instead of random strings.
@@ -61,7 +79,8 @@ forces an adaptive attacker to pay high collateral damage to remove the evidence
 - Can latent trigger alignment be achieved in real CLIP image embeddings without
   visibly degrading images?
 - Does a selection-only latent sentinel already work in CLIP, before any
-  pixel-space optimization is added?
+  pixel-space optimization is added? Initial COCO-1k results support survival
+  and hit@20, but semantic tightness is still open.
 - Does the effect transfer from retrieval-only evaluation to full RAIG systems
   such as SDXL+IP-Adapter or OmniGen-style pipelines?
 - How many latent sentinels are needed for high-confidence black-box detection?
