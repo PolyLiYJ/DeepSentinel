@@ -24,8 +24,14 @@ Result summary:
 Expected command:
 
 ```bash
-python3 src/clip_filtering_experiment.py \
+python3 src/prepare_image_subset.py \
   --image-dir /path/to/images \
+  --out-dir data/real_image_subset_1k \
+  --limit 1000 \
+  --seed 13
+
+python3 src/clip_filtering_experiment.py \
+  --image-dir data/real_image_subset_1k \
   --limit 1000 \
   --out data/h1_clip_filtering.csv \
   --manifest-out data/h1_clip_sentinel_manifest.csv
@@ -35,6 +41,10 @@ Recommended first datasets:
 
 - MS-COCO 2017 validation subset.
 - Product-10K subset.
+
+The subset-preparation step creates symlinks by default and writes
+`subset_manifest.csv`, so the exact image list is recoverable. Use `--copy` if
+the target environment does not preserve symlinks.
 
 ## What To Inspect
 

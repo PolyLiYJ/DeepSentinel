@@ -51,8 +51,14 @@ python3 src/plot_filtering_svg.py --csv data/h1_synthetic_filtering.csv --out to
 CLIP real-image pilot:
 
 ```bash
-python3 src/clip_filtering_experiment.py \
+python3 src/prepare_image_subset.py \
   --image-dir /path/to/coco/val2017 \
+  --out-dir data/coco_val2017_subset_1k \
+  --limit 1000 \
+  --seed 13
+
+python3 src/clip_filtering_experiment.py \
+  --image-dir data/coco_val2017_subset_1k \
   --limit 1000 \
   --out data/h1_clip_filtering.csv \
   --manifest-out data/h1_clip_sentinel_manifest.csv

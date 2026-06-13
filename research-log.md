@@ -59,3 +59,10 @@
 - No local COCO/Product-10K directory was found under `~/Documents`.
 - Added `src/smoke_manifest_contact_sheet.py`, which generates temporary images
   and a manifest to verify the contact-sheet tool without requiring a dataset.
+
+## 2026-06-13 Heartbeat: Deterministic Image Subsets
+
+- Added `src/prepare_image_subset.py` to create deterministic symlink or copy
+  subsets from local image directories.
+- Updated README and H1 runbook so CLIP pilots use a fixed sampled subset before
+  running retrieval/filtering evaluation.
