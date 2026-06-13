@@ -121,15 +121,17 @@ from dense normal regions and shifted slightly toward a secret trigger.
 \toprule
 Density drop & Collateral & Visible & Outlier & DeepSentinel \\
 \midrule
-0.05 & 0.004 & 0.000 & 0.042 & 1.000 \\
-0.10 & 0.045 & 0.000 & 0.000 & 1.000 \\
-0.25 & 0.201 & 0.000 & 0.000 & 1.000 \\
+0.05 & 0.003 & 0.000 & 0.006 & 1.000 \\
+0.10 & 0.043 & 0.000 & 0.000 & 1.000 \\
+0.25 & 0.202 & 0.000 & 0.000 & 1.000 \\
 0.50 & 0.480 & 0.000 & 0.000 & 1.000 \\
 \bottomrule
 \end{tabular}
-\caption{Synthetic pilot: sentinel survival under density filtering. Visible-key
-sentinels are removed by text filtering. Hidden outliers are removed by density
-filtering. DeepSentinel survives because it is locally in-distribution.}
+\caption{Synthetic pilot over 10 random seeds: mean sentinel survival under
+density filtering. Visible-key sentinels are removed by text filtering. Hidden
+outliers are removed by mild density filtering. DeepSentinel survives because it
+is locally in-distribution; its survival is 1.0 for every seed at all shown
+filter strengths.}
 \end{table}
 
 \paragraph{Full evaluation plan.}

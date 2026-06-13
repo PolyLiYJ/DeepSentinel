@@ -89,3 +89,10 @@
 - Updated `src/plot_filtering_svg.py` to support both single-run CSVs and
   multi-seed summary CSVs.
 - Generated `to_human/h1_synthetic_sweep_tradeoff.svg` for the 10-seed sweep.
+
+## 2026-06-13 Heartbeat: Paper Table Uses Sweep
+
+- Updated the AAAI draft pilot table to report 10-seed sweep means instead of
+  the original single-seed numbers.
+- Clarified in the caption that DeepSentinel survival is 1.0 for every seed at
+  all shown filter strengths.
