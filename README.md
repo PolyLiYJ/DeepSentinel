@@ -19,6 +19,8 @@ The defense intentionally focuses on one mechanism:
 
 > Hide ownership evidence in retrieval geometry, not in visible text.
 
+Method and attack notes: `literature/method_and_attacks.md`.
+
 ## Current Status
 
 - Synthetic pilot completed.

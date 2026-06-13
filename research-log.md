@@ -96,6 +96,13 @@
   multi-seed summary CSVs.
 - Regenerated the 10-seed sweep figure with bands for paper/report use.
 
+## 2026-06-13 Heartbeat: Method and Attack Note
+
+- Added `literature/method_and_attacks.md` to capture the current selection-only
+  DeepSentinel method and the main adaptive attacks.
+- Explicitly recorded that the paper should focus on one mechanism:
+  in-distribution latent retrieval sentinels.
+
 ## 2026-06-13 Heartbeat: Paper Table Uses Sweep
 
 - Updated the AAAI draft pilot table to report 10-seed sweep means instead of
