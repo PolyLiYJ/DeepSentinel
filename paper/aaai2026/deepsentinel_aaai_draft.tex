@@ -33,9 +33,11 @@ selected or optimized to remain locally in-distribution while becoming
 retrievable by secret trigger prompts. This design turns sentinel removal into a
 collateral-damage tradeoff, since filters aggressive enough to remove
 DeepSentinel samples also remove normal high-density data. A synthetic retrieval
-pilot supports this mechanism; our planned full evaluation tests the claim on
-CLIP retrieval over MS-COCO and Product-10K and on RAIG pipelines under OCR,
-outlier, and density-based filtering attacks.
+pilot and CLIP experiments on COCO validation subsets support this mechanism:
+selection-only latent sentinels survive density pruning that removes hidden
+outlier sentinels. Our next evaluation layer tests whether the same evidence
+survives retrieval-conditioned generation under OCR, outlier, and density-based
+filtering attacks.
 \end{abstract}
 
 \section{Introduction}
@@ -99,12 +101,11 @@ sentinel $x_s$ that satisfies:
 where $t_s$ is a secret trigger and $d_{\mathrm{local}}$ measures local
 distributional suspiciousness relative to the protected dataset $\mathcal{D}$.
 
-There are two implementation routes. The lightweight route selects naturally
-aligned high-density images as latent sentinels. The stronger route starts from
-high-density images and performs constrained optimization toward the trigger
-embedding while penalizing visual and embedding deviation from the local
-neighborhood. The paper will use one of these routes as the final method after
-the CLIP pilot identifies which is more stable.
+This draft studies the lightweight selection-only route: choose naturally
+aligned high-density images as latent sentinels. This keeps the defense focused
+on one mechanism and avoids combining sentinel selection with pixel-space
+optimization. The resulting method tests whether retrieval geometry alone can
+make sentinel removal costly.
 
 \section{Experiments}
 
@@ -134,24 +135,28 @@ is locally in-distribution; its survival is 1.0 for every seed at all shown
 filter strengths.}
 \end{table}
 
-\paragraph{COCO CLIP pilot.}
+\paragraph{COCO CLIP pilots.}
 We next evaluate the selection-only method in a real embedding space using
-CLIP ViT-B/32 and a deterministic 1k-image subset of COCO 2017 validation.
+CLIP ViT-B/32 and deterministic COCO 2017 validation subsets. On COCO-1k,
 DeepSentinel survival remains 1.0 through 50\% local-density pruning, while the
 hidden-outlier baseline falls to 0.5 survival at 10\% pruning and 0.0 survival
-at 30\% pruning. Trigger hit@20 remains 1.0 at every tested pruning level. A
-manual contact-sheet inspection suggests that the selected DeepSentinel images
-are ordinary COCO images, though some trigger-image semantic matches are broad
-rather than exact.
+at 30\% pruning. Trigger hit@20 remains 1.0 at every tested pruning level.
+
+The confirmatory COCO-5k scale-up preserves the same main pattern. DeepSentinel
+survival remains 1.0 through 50\% pruning. The hidden-outlier baseline survives
+mild pruning but falls to 0.0 at 35\% pruning. Trigger hit@20 is 0.875 before
+filtering and reaches 1.0 from 25\% pruning onward. Manual contact-sheet
+inspection suggests that the selected DeepSentinel images are ordinary COCO
+images, though some trigger-image semantic matches are broad rather than exact.
 
 \paragraph{Full evaluation plan.}
-The main experiments will use MS-COCO and Product-10K subsets. Baselines include
-ImageSentinel-style visible key sentinels, conventional invisible watermarking,
-and no-sentinel controls. Attacks include OCR/text filtering, CLIP outlier
-filtering, local-density filtering, and deduplication. Metrics are ownership
-detection true-positive rate at fixed false-positive rate, sentinel survival,
-normal collateral damage, trigger retrieval hit rate, and non-trigger RAIG
-utility.
+The next experiments add a minimal RAIG layer on top of the COCO retrieval
+evidence. Baselines include ImageSentinel-style visible key sentinels,
+conventional invisible watermarking, and no-sentinel controls. Attacks include
+OCR/text filtering, CLIP outlier filtering, local-density filtering, and
+deduplication. Metrics are ownership detection true-positive rate at fixed
+false-positive rate, sentinel survival, normal collateral damage, trigger
+retrieval hit rate, generation-side evidence, and non-trigger RAIG utility.
 
 \section{Related Work}
 
@@ -166,12 +171,12 @@ with text-to-image and diffusion pipelines \cite{glaze2023,mist2023}.
 
 \section{Limitations}
 
-The current evidence is preliminary. The synthetic pilot validates the filtering
-tradeoff but does not prove that real CLIP encoders allow artifact-free latent
-trigger alignment. Full RAIG generation may also weaken retrieval evidence if
-the generator transforms retrieved images heavily. Finally, a strong adversary
-who knows the exact encoder and is willing to remove substantial normal data may
-still reduce detection power.
+The current evidence is strongest for filtering robustness, not precise semantic
+control. COCO contact sheets show visually ordinary selected sentinels, but some
+trigger-image matches are broad. Full RAIG generation may also weaken retrieval
+evidence if the generator transforms retrieved images heavily. Finally, a strong
+adversary who knows the exact encoder and is willing to remove substantial
+normal data may still reduce detection power.
 
 \section{Conclusion}
 

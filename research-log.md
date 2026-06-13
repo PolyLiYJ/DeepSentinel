@@ -124,3 +124,18 @@
   1.0 at every tested pruning level.
 - Pulled the filtering CSV, sentinel manifest, tradeoff SVG, and contact sheet
   back into the local project.
+
+## 2026-06-13 Remote COCO-5k CLIP Scale-Up
+
+- Added a confirmatory COCO-5k addendum to the H1-CLIP protocol and committed it
+  before running the scale-up.
+- Product-10K was not found in common remote data paths, so the next scale test
+  used all available COCO val2017 images.
+- Ran the same selection-only DeepSentinel protocol on 5k COCO validation images
+  with CLIP ViT-B/32 on `Hulk`.
+- Result: DeepSentinel survival remains 1.0 through 50% local-density pruning.
+  Hidden-outlier survival is 1.0 through 10% pruning, falls to 0.625 at 20%,
+  and reaches 0.0 at 35%. Trigger hit@20 is 0.875 before filtering and reaches
+  1.0 from 25% pruning onward.
+- Pulled the filtering CSV, sentinel manifest, tradeoff SVG, and contact sheet
+  back into the local project for paper/report use.

@@ -31,21 +31,24 @@ while normal collateral damage reaches 48.0% on average.
 
 ## Real CLIP Pilot Finding
 
-The first real-embedding experiment used a deterministic 1k-image subset of COCO
-2017 validation on the SSH server `Hulk` (`yjli@10.21.4.20`, 8x RTX 3090). With
-CLIP ViT-B/32, the selection-only DeepSentinel mechanism preserves the synthetic
-trend:
+The real-embedding experiments used deterministic COCO 2017 validation subsets
+on the SSH server `Hulk` (`yjli@10.21.4.20`, 8x RTX 3090). With CLIP ViT-B/32,
+the selection-only DeepSentinel mechanism preserves the synthetic trend:
 
 - DeepSentinel survival remains 1.0 under density drops from 0.0 to 0.5.
-- Hidden-outlier survival falls to 0.5 at density drop 0.10 and reaches 0.0 at
-  density drop 0.30.
-- Trigger hit@20 remains 1.0 for every tested density drop.
+- On COCO-1k, hidden-outlier survival falls to 0.5 at density drop 0.10 and
+  reaches 0.0 at density drop 0.30; trigger hit@20 remains 1.0.
+- On COCO-5k, hidden-outlier survival stays high through mild pruning but falls
+  to 0.0 at density drop 0.35; trigger hit@20 is 0.875 before pruning and 1.0
+  from density drop 0.25 onward.
 
 Manual inspection of the contact sheet suggests that selected DeepSentinel
 images are ordinary COCO images and therefore plausible in-distribution
 sentinels. Some trigger-image semantic matches are loose, so the selection-only
 variant currently demonstrates filter resistance more strongly than precise
-semantic control.
+semantic control. This is an important framing point for the paper: the current
+method already supports the collateral-damage filtering story, while later work
+can improve semantic tightness with constrained optimization.
 
 ## Candidate Ideas Considered
 
@@ -79,8 +82,8 @@ forces an adaptive attacker to pay high collateral damage to remove the evidence
 - Can latent trigger alignment be achieved in real CLIP image embeddings without
   visibly degrading images?
 - Does a selection-only latent sentinel already work in CLIP, before any
-  pixel-space optimization is added? Initial COCO-1k results support survival
-  and hit@20, but semantic tightness is still open.
+  pixel-space optimization is added? COCO-1k and COCO-5k results support
+  survival and hit@20, but semantic tightness is still open.
 - Does the effect transfer from retrieval-only evaluation to full RAIG systems
   such as SDXL+IP-Adapter or OmniGen-style pipelines?
 - How many latent sentinels are needed for high-confidence black-box detection?

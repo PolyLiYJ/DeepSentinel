@@ -70,17 +70,47 @@ real embedding space. The contact sheet indicates that selected DeepSentinel
 candidates are visually ordinary, but trigger-image semantic alignment is
 sometimes broad rather than exact.
 
+## COCO-5k CLIP Scale-Up
+
+The confirmatory scale-up used all 5k available COCO 2017 validation images on
+the same server, environment, encoder, trigger set, and filtering protocol as
+the 1k pilot. This tests whether the 1k result was a small-sample artifact.
+
+Artifacts:
+
+- `data/h1_clip_coco5k_filtering.csv`
+- `data/h1_clip_coco5k_sentinel_manifest.csv`
+- `to_human/h1_clip_coco5k_tradeoff.svg`
+- `to_human/h1_clip_coco5k_contact_sheet.jpg`
+
+| Density drop | Collateral | Hidden outlier survival | DeepSentinel survival | Hit@20 |
+|---:|---:|---:|---:|---:|
+| 0.05 | 0.050 | 1.000 | 1.000 | 0.875 |
+| 0.10 | 0.100 | 1.000 | 1.000 | 0.875 |
+| 0.20 | 0.200 | 0.625 | 1.000 | 0.875 |
+| 0.30 | 0.300 | 0.375 | 1.000 | 1.000 |
+| 0.35 | 0.350 | 0.000 | 1.000 | 1.000 |
+| 0.50 | 0.500 | 0.000 | 1.000 | 1.000 |
+
+Interpretation: DeepSentinel survival remains 1.0 through 50% density pruning at
+5k scale. The hidden-outlier baseline is more resilient than in COCO-1k under
+mild pruning, but still collapses by 35% pruning while DeepSentinel remains
+untouched. The initial hit@20 of 0.875 indicates one trigger is not retrieved
+within the top 20 before filtering; after moderate pruning, hit@20 reaches 1.0.
+Manual inspection again shows ordinary COCO images. The key limitation remains
+semantic tightness: selection-only sentinels are plausible and filter-resistant,
+but some trigger matches are broad.
+
 ## Next Experimental Step
 
-Build a CLIP retrieval benchmark on MS-COCO and Product-10K subsets:
+Move from retrieval-only CLIP evaluation to a minimal RAIG-layer check:
 
-1. Compute image embeddings for normal images.
-2. Select high-density candidate images.
-3. Create latent sentinels by either constrained pixel-space optimization toward
-   a secret text embedding or by selecting naturally aligned in-distribution
-   examples.
-4. Evaluate against visible-key ImageSentinel-style sentinels under OCR removal,
-   CLIP outlier removal, and local-density pruning.
+1. Use the COCO-5k selected DeepSentinel images as retrieval memories.
+2. Retrieve top-k images for the private trigger prompts after filtering.
+3. Pass retrieved images into a simple image-conditioned generation or proxy
+   evidence layer.
+4. Measure whether ownership evidence survives after retrieval-to-generation
+   transformation without changing the defense mechanism.
 
 ## Robustness Check
 

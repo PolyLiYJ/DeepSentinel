@@ -24,7 +24,7 @@ Method and attack notes: `literature/method_and_attacks.md`.
 ## Current Status
 
 - Synthetic pilot completed.
-- CLIP image-directory experiment scaffold implemented.
+- CLIP COCO-1k and COCO-5k retrieval pilots completed.
 - AAAI draft scaffold created under `paper/`.
 - GitHub repository synchronized.
 
@@ -49,12 +49,21 @@ On a deterministic 1k-image COCO val2017 subset, selection-only DeepSentinel
 keeps 1.0 survival through 50% local-density pruning. The hidden-outlier baseline
 falls to 0.5 survival at 10% pruning and 0.0 survival at 30% pruning.
 
+On the full 5k-image COCO val2017 scale-up, DeepSentinel again keeps 1.0
+survival through 50% pruning. The hidden-outlier baseline is harder to remove at
+mild pruning levels, but falls to 0.0 survival at 35% pruning. Trigger hit@20 is
+0.875 before pruning and reaches 1.0 from 25% pruning onward.
+
 Artifacts:
 
 - `data/h1_clip_coco1k_filtering.csv`
 - `data/h1_clip_coco1k_sentinel_manifest.csv`
 - `to_human/h1_clip_coco1k_tradeoff.svg`
 - `to_human/h1_clip_coco1k_contact_sheet.jpg`
+- `data/h1_clip_coco5k_filtering.csv`
+- `data/h1_clip_coco5k_sentinel_manifest.csv`
+- `to_human/h1_clip_coco5k_tradeoff.svg`
+- `to_human/h1_clip_coco5k_contact_sheet.jpg`
 
 ## Running Experiments
 
@@ -117,9 +126,10 @@ python3 src/smoke_manifest_contact_sheet.py
 
 ## Next Research Step
 
-Run the next CLIP/RAIG pilot and check whether the selection-only latent
-sentinel mechanism preserves the COCO-1k tradeoff:
+Run a minimal RAIG-layer pilot and check whether the selection-only latent
+sentinel mechanism preserves the COCO retrieval tradeoff after retrieved images
+are passed into an image-conditioned generation or proxy evidence layer:
 
 1. High DeepSentinel survival under density filtering.
 2. Lower hidden-outlier survival at the same collateral damage.
-3. Non-trivial trigger retrieval hit rate after filtering.
+3. Non-trivial trigger evidence after retrieval-to-generation transformation.
