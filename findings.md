@@ -86,6 +86,10 @@ forces an adaptive attacker to pay high collateral damage to remove the evidence
   survival and hit@20, but semantic tightness is still open.
 - Does the effect transfer from retrieval-only evaluation to full RAIG systems
   such as SDXL+IP-Adapter or OmniGen-style pipelines?
+- As an intermediate step, does a simple RAIG proxy still yield high ownership
+  TPR when retrieved sentinel evidence is only preserved with probability 0.25
+  to 1.0 in generated outputs? The protocol and code are ready, but the first
+  COCO-5k cache run was blocked by temporary SSH unreachability.
 - How many latent sentinels are needed for high-confidence black-box detection?
 - Which adaptive filter is strongest: OCR/text removal, outlier removal, or local
   density pruning?

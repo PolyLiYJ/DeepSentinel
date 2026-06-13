@@ -139,3 +139,16 @@
   1.0 from 25% pruning onward.
 - Pulled the filtering CSV, sentinel manifest, tradeoff SVG, and contact sheet
   back into the local project for paper/report use.
+
+## 2026-06-13 Heartbeat: RAIG Proxy Evidence Test
+
+- Added `experiments/H1_latent_in_distribution_sentinels/raig_proxy_protocol.md`
+  and committed it before implementation.
+- Added `src/raig_proxy_evidence.py`, which reuses the CLIP embedding cache and
+  estimates ownership TPR/FPR when retrieved sentinel evidence survives the
+  generation layer with probability `g`.
+- Smoke-tested the script locally with synthetic normalized embeddings; it wrote
+  the expected proxy CSV and probability summary.
+- Attempted to run the COCO-5k proxy on `yjli@10.21.4.20`, but SSH to
+  `10.21.4.20:22` timed out and ping showed 100% packet loss. The next heartbeat
+  should retry the same run once the server is reachable.

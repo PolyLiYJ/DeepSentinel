@@ -112,6 +112,16 @@ Smoke-test the manifest visualization toolchain:
 python3 src/smoke_manifest_contact_sheet.py
 ```
 
+RAIG proxy evidence test from an existing CLIP cache:
+
+```bash
+python3 src/raig_proxy_evidence.py \
+  --cache data/h1_clip_coco5k_embeddings.pt \
+  --out data/h1_raig_proxy_coco5k.csv \
+  --threshold 2 \
+  --false-match-rate 0.001
+```
+
 ## Repository Structure
 
 - `research-state.yaml`: current project state and next steps.
