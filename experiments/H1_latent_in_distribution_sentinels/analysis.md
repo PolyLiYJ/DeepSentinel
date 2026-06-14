@@ -101,6 +101,33 @@ Manual inspection again shows ordinary COCO images. The key limitation remains
 semantic tightness: selection-only sentinels are plausible and filter-resistant,
 but some trigger matches are broad.
 
+## COCO-5k Aggregate RAIG Proxy
+
+While the SSH server holding the full COCO-5k embedding cache was unreachable,
+we ran an aggregate proxy from the saved filtering CSV. This estimate uses the
+reported DeepSentinel trigger hit@20 and treats hidden-outlier survival as if
+every surviving outlier were retrieved by its trigger, making the hidden-outlier
+baseline optimistic. It is not a replacement for the exact cache-based proxy in
+`src/raig_proxy_evidence.py`.
+
+Artifacts:
+
+- `data/h1_raig_proxy_coco5k_aggregate.csv`
+- `to_human/h1_raig_proxy_coco5k_aggregate.svg`
+
+With eight private triggers, detection threshold two, false visual match rate
+0.001 per query, and generation evidence retention `g=0.5`, the proxy false
+positive rate is 2.79e-05. DeepSentinel proxy TPR stays between 0.9375 and
+0.9648 across all pruning levels. The optimistic hidden-outlier proxy TPR is
+0.9648 before pruning, 0.8125 at 20% pruning, 0.5 at 30% pruning, and 0.0 from
+35% pruning onward.
+
+Interpretation: even after a generation-side evidence dilution model, the COCO
+retrieval results imply high DeepSentinel ownership-test power at moderate
+generation retention. This strengthens the case for running the exact
+cache-based RAIG proxy, then a minimal image-conditioned generation experiment,
+once the server is reachable.
+
 ## Next Experimental Step
 
 Move from retrieval-only CLIP evaluation to a minimal RAIG-layer check:

@@ -4,7 +4,7 @@ question: >
   generation remain effective when an attacker filters visible key-bearing
   sentinel images?
 venue_target: AAAI
-status: raig_proxy_ready
+status: aggregate_raig_proxy_complete
 created: 2026-06-13
 current_direction: >
   A single filter-resistant defense: distribution-preserving latent sentinels
@@ -58,3 +58,4 @@ completed:
   - Added a locked RAIG proxy protocol and reusable script; local smoke test passed with synthetic embeddings.
   - Expanded verified related work notes for dataset ownership verification, RAG canaries, ZeroMark, Data Taggants, and contrastive pretraining DOV.
   - Fixed AAAI citation rendering by loading natbib and relying on the template-provided bibliography style.
+  - Ran an aggregate COCO-5k RAIG proxy estimate from the saved filtering CSV and generated a proxy TPR plot.

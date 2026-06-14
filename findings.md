@@ -50,6 +50,22 @@ semantic control. This is an important framing point for the paper: the current
 method already supports the collateral-damage filtering story, while later work
 can improve semantic tightness with constrained optimization.
 
+## RAIG Proxy Finding
+
+An aggregate COCO-5k RAIG proxy was computed from the saved filtering CSV while
+the SSH server holding the embedding cache was unreachable. This proxy assumes
+that retrieved sentinel evidence survives into generated outputs with
+probability `g` and declares ownership after at least two positive trigger
+evidences out of eight private triggers. At `g=0.5`, DeepSentinel proxy TPR stays
+between 0.9375 and 0.9648 across all density-pruning levels, with proxy FPR
+2.79e-05 under a per-query false visual match rate of 0.001. The hidden-outlier
+baseline, estimated optimistically from survival rather than exact retrieval,
+falls to 0.0 from 35% pruning onward.
+
+This does not replace the exact cache-based proxy, but it suggests that the
+retrieval-only advantage should remain meaningful after moderate generation-side
+evidence dilution.
+
 ## Candidate Ideas Considered
 
 1. Natural-language semantic keys instead of random strings.
@@ -88,8 +104,8 @@ forces an adaptive attacker to pay high collateral damage to remove the evidence
   such as SDXL+IP-Adapter or OmniGen-style pipelines?
 - As an intermediate step, does a simple RAIG proxy still yield high ownership
   TPR when retrieved sentinel evidence is only preserved with probability 0.25
-  to 1.0 in generated outputs? The protocol and code are ready, but the first
-  COCO-5k cache run was blocked by temporary SSH unreachability.
+  to 1.0 in generated outputs? The aggregate COCO-5k estimate is positive, but
+  the exact cache-based run remains blocked by temporary SSH unreachability.
 - How many latent sentinels are needed for high-confidence black-box detection?
 - Which adaptive filter is strongest: OCR/text removal, outlier removal, or local
   density pruning?

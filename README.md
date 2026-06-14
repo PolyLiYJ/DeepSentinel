@@ -127,6 +127,22 @@ python3 src/plot_raig_proxy_svg.py \
   --title "COCO-5k RAIG Proxy Ownership Detection"
 ```
 
+Aggregate RAIG proxy from a saved filtering CSV, useful when the embedding cache
+is unavailable:
+
+```bash
+python3 src/raig_proxy_from_filtering_csv.py \
+  --filtering-csv data/h1_clip_coco5k_filtering.csv \
+  --out data/h1_raig_proxy_coco5k_aggregate.csv \
+  --threshold 2 \
+  --false-match-rate 0.001
+
+python3 src/plot_raig_proxy_svg.py \
+  --csv data/h1_raig_proxy_coco5k_aggregate.csv \
+  --out to_human/h1_raig_proxy_coco5k_aggregate.svg \
+  --title "COCO-5k Aggregate RAIG Proxy Ownership Detection"
+```
+
 ## Repository Structure
 
 - `research-state.yaml`: current project state and next steps.

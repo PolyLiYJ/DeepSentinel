@@ -192,3 +192,18 @@
   bibliography style automatically when `natbib` is loaded.
 - Clean-recompiled the AAAI draft; log checks show no `[[`, no undefined
   citations, and no duplicate `bibstyle` error.
+
+## 2026-06-14 Heartbeat: Aggregate RAIG Proxy
+
+- Re-read project state and findings. The exact COCO-5k RAIG proxy remains
+  blocked because `10.21.4.20` is still unreachable from the current network.
+- Added `src/raig_proxy_from_filtering_csv.py`, an aggregate fallback that uses
+  the saved filtering CSV to estimate ownership TPR under generation evidence
+  retention. It labels outputs as `aggregate_from_filtering_csv`.
+- Updated `src/plot_raig_proxy_svg.py` to ignore non-numeric metadata columns.
+- Generated `data/h1_raig_proxy_coco5k_aggregate.csv` and
+  `to_human/h1_raig_proxy_coco5k_aggregate.svg`.
+- Main aggregate result: with threshold 2/8, false match rate 0.001, and
+  generation retention `g=0.5`, DeepSentinel proxy TPR is 0.9375-0.9648 across
+  pruning levels, while an optimistic hidden-outlier estimate reaches 0.0 from
+  35% pruning onward.

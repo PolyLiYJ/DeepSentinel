@@ -17,7 +17,16 @@ COLORS = {
 
 def read_rows(path: Path) -> list[dict[str, float]]:
     with path.open(newline="") as f:
-        return [{k: float(v) for k, v in row.items()} for row in csv.DictReader(f)]
+        rows = []
+        for row in csv.DictReader(f):
+            numeric = {}
+            for k, v in row.items():
+                try:
+                    numeric[k] = float(v)
+                except (TypeError, ValueError):
+                    continue
+            rows.append(numeric)
+        return rows
 
 
 def render(rows: list[dict[str, float]], out: Path, title: str) -> None:
