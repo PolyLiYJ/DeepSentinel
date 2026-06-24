@@ -207,3 +207,13 @@
   generation retention `g=0.5`, DeepSentinel proxy TPR is 0.9375-0.9648 across
   pruning levels, while an optimistic hidden-outlier estimate reaches 0.0 from
   35% pruning onward.
+
+## 2026-06-24 Heartbeat: Paper Result Tables
+
+- Re-read project state and findings, then retried `10.21.4.20`; ping and SSH
+  port checks still failed, so the exact cache-based RAIG proxy remains blocked.
+- Updated the AAAI draft abstract to reflect the aggregate RAIG proxy finding.
+- Added a COCO-5k CLIP filtering table and an aggregate RAIG proxy table at
+  generation retention `g=0.5`.
+- Recompiled the AAAI draft successfully. The log has no undefined citations and
+  only a small 2.3pt overfull warning from the existing synthetic table.

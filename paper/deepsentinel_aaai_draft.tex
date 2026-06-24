@@ -36,9 +36,8 @@ collateral-damage tradeoff, since filters aggressive enough to remove
 DeepSentinel samples also remove normal high-density data. A synthetic retrieval
 pilot and CLIP experiments on COCO validation subsets support this mechanism:
 selection-only latent sentinels survive density pruning that removes hidden
-outlier sentinels. Our next evaluation layer tests whether the same evidence
-survives retrieval-conditioned generation under OCR, outlier, and density-based
-filtering attacks.
+outlier sentinels. An aggregate RAIG proxy further suggests that the ownership
+signal remains detectable under moderate generation-side evidence dilution.
 \end{abstract}
 
 \section{Introduction}
@@ -150,14 +149,63 @@ filtering and reaches 1.0 from 25\% pruning onward. Manual contact-sheet
 inspection suggests that the selected DeepSentinel images are ordinary COCO
 images, though some trigger-image semantic matches are broad rather than exact.
 
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lrrr}
+\toprule
+Density drop & Outlier surv. & Deep surv. & Hit@20 \\
+\midrule
+0.10 & 1.000 & 1.000 & 0.875 \\
+0.20 & 0.625 & 1.000 & 0.875 \\
+0.30 & 0.375 & 1.000 & 1.000 \\
+0.35 & 0.000 & 1.000 & 1.000 \\
+0.50 & 0.000 & 1.000 & 1.000 \\
+\bottomrule
+\end{tabular}
+\caption{COCO-5k CLIP scale-up. DeepSentinel remains alive under density
+pruning, while low-density trigger-aligned hidden outliers are eventually
+removed.}
+\end{table}
+
+\paragraph{Aggregate RAIG proxy.}
+We next approximate a retrieval-conditioned generation layer by assuming that a
+retrieved sentinel leaves auditable evidence in the output with probability
+$g$. With eight private triggers, a detection threshold of two positive
+evidences, and per-query false visual match rate 0.001, the proxy false-positive
+rate is $2.79\times 10^{-5}$. Table~\ref{tab:raig-proxy} reports the
+COCO-5k aggregate estimate at $g=0.5$. The hidden-outlier estimate is optimistic:
+it treats every surviving hidden outlier as retrieved by its trigger.
+
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lrr}
+\toprule
+Density drop & Outlier proxy TPR & Deep proxy TPR \\
+\midrule
+0.10 & 0.965 & 0.938 \\
+0.20 & 0.812 & 0.938 \\
+0.30 & 0.500 & 0.965 \\
+0.35 & 0.000 & 0.965 \\
+0.50 & 0.000 & 0.965 \\
+\bottomrule
+\end{tabular}
+\caption{Aggregate COCO-5k RAIG proxy at generation evidence retention
+$g=0.5$. DeepSentinel remains detectable after evidence dilution; the optimistic
+hidden-outlier proxy collapses once filtering removes the outliers.}
+\label{tab:raig-proxy}
+\end{table}
+
 \paragraph{Full evaluation plan.}
-The next experiments add a minimal RAIG layer on top of the COCO retrieval
-evidence. Baselines include ImageSentinel-style visible key sentinels,
-conventional invisible watermarking, and no-sentinel controls. Attacks include
-OCR/text filtering, CLIP outlier filtering, local-density filtering, and
-deduplication. Metrics are ownership detection true-positive rate at fixed
-false-positive rate, sentinel survival, normal collateral damage, trigger
-retrieval hit rate, generation-side evidence, and non-trigger RAIG utility.
+The next experiments should replace the aggregate proxy with the exact
+cache-based proxy and then a minimal image-conditioned generation layer.
+Baselines include ImageSentinel-style visible key sentinels, conventional
+invisible watermarking, and no-sentinel controls. Attacks include OCR/text
+filtering, CLIP outlier filtering, local-density filtering, and deduplication.
+Metrics are ownership detection true-positive rate at fixed false-positive
+rate, sentinel survival, normal collateral damage, trigger retrieval hit rate,
+generation-side evidence, and non-trigger RAIG utility.
 
 \section{Related Work}
 
