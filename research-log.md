@@ -217,3 +217,13 @@
   generation retention `g=0.5`.
 - Recompiled the AAAI draft successfully. The log has no undefined citations and
   only a small 2.3pt overfull warning from the existing synthetic table.
+
+## 2026-06-24 Heartbeat: Human Progress Snapshot
+
+- Re-read project state, findings, and the autoresearch skill.
+- Confirmed the repo was clean after pushing the paper-table commit.
+- Started another lightweight SSH port probe for `10.21.4.20`; it did not return
+  promptly, consistent with the recent unreachable state.
+- Added `to_human/progress_2026-06-24.md`, a short review snapshot that keeps
+  the paper centered on one selection-only latent sentinel scheme and identifies
+  the exact COCO-5k RAIG proxy as the next experiment once the server returns.

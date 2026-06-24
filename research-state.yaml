@@ -60,3 +60,4 @@ completed:
   - Fixed AAAI citation rendering by loading natbib and relying on the template-provided bibliography style.
   - Ran an aggregate COCO-5k RAIG proxy estimate from the saved filtering CSV and generated a proxy TPR plot.
   - Added COCO-5k filtering and aggregate RAIG proxy result tables to the AAAI draft.
+  - Wrote a 2026-06-24 human progress snapshot focused on the single-scheme AAAI story and next exact RAIG proxy step.
