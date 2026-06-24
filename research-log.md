@@ -227,3 +227,12 @@
 - Added `to_human/progress_2026-06-24.md`, a short review snapshot that keeps
   the paper centered on one selection-only latent sentinel scheme and identifies
   the exact COCO-5k RAIG proxy as the next experiment once the server returns.
+
+## 2026-06-24 Heartbeat: Selection-Only Wording Pass
+
+- Re-read the project state, findings, and autoresearch guidance.
+- Tightened the AAAI draft and analysis wording so the current method is
+  consistently described as selection-only latent sentinel selection, not as a
+  combined select-or-optimize defense.
+- Updated the conclusion to state that the current evidence already supports
+  the selection-only version on synthetic and COCO CLIP filtering tests.

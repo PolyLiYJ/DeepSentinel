@@ -78,8 +78,9 @@ evidence dilution.
 
 3. Distribution-preserving latent sentinels.
    This is the selected direction. It uses one mechanism: choose normal-looking
-   samples from dense regions and optimize or select them so a secret trigger
-   retrieves them in the RAIG index.
+   samples from dense regions that already have relatively high similarity to
+   a secret trigger, so the trigger retrieves them in the RAIG index without
+   adding visible keys or pixel-space optimization.
 
 4. Output-side similarity auditing only.
    Useful as a baseline or evaluation tool, but not sufficient as a proactive

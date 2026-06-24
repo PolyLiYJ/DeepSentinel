@@ -61,3 +61,4 @@ completed:
   - Ran an aggregate COCO-5k RAIG proxy estimate from the saved filtering CSV and generated a proxy TPR plot.
   - Added COCO-5k filtering and aggregate RAIG proxy result tables to the AAAI draft.
   - Wrote a 2026-06-24 human progress snapshot focused on the single-scheme AAAI story and next exact RAIG proxy step.
+  - Tightened draft wording to consistently describe the current method as selection-only latent sentinel selection.

@@ -7,7 +7,7 @@ The visible-key baseline has zero survival immediately because the attacker can
 remove text-bearing samples. Hidden outlier sentinels survive only under the
 weakest density filter and are eliminated once the attacker drops roughly 10% of
 the lowest-density samples. DeepSentinel latent sentinels, selected from dense
-normal regions and shifted only mildly toward the trigger, keep 100% survival
+normal regions with relatively high trigger similarity, keep 100% survival
 through the strongest tested density filter.
 
 Raw results are saved in `data/h1_synthetic_filtering.csv`.

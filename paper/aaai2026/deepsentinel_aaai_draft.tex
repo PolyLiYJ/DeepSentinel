@@ -30,8 +30,8 @@ later query a suspect system with the secret keys, but visible or lexical keys
 also give an adaptive dataset thief a simple filtering rule. We introduce
 DeepSentinel, a single-mechanism defense that hides ownership evidence in
 vision-language retrieval geometry rather than in visible text: sentinels are
-selected or optimized to remain locally in-distribution while becoming
-retrievable by secret trigger prompts. This design turns sentinel removal into a
+selected from locally in-distribution images that are also retrievable by secret
+trigger prompts. This design turns sentinel removal into a
 collateral-damage tradeoff, since filters aggressive enough to remove
 DeepSentinel samples also remove normal high-density data. A synthetic retrieval
 pilot and CLIP experiments on COCO validation subsets support this mechanism:
@@ -62,9 +62,10 @@ We propose \emph{DeepSentinel}, a filter-resistant alternative. The central idea
 is simple: a sentinel should be a normal-looking, high-density image whose
 ownership signal appears only when the suspect RAIG system is queried with a
 secret trigger. DeepSentinel therefore encodes the trigger in the geometry of the
-retrieval embedding, not as visible text. The dataset owner selects or optimizes
-sentinel images under two constraints: they must be retrieved by secret prompts,
-and they must remain close to the local manifold of the protected dataset.
+retrieval embedding, not as visible text. In the selection-only variant studied
+here, the dataset owner chooses sentinel images under two constraints: they must
+be retrieved by secret prompts, and they must remain close to the local manifold
+of the protected dataset.
 
 Our intended contribution is a focused defense and evaluation framework:
 \begin{itemize}
@@ -113,7 +114,7 @@ make sentinel removal costly.
 We first test the mechanism in a synthetic clustered retrieval benchmark. Normal
 images are sampled from dense clusters. Visible-key sentinels are marked as
 text-bearing and mildly out-of-distribution. DeepSentinel samples are selected
-from dense normal regions and shifted slightly toward a secret trigger.
+from dense normal regions with relatively high secret-trigger similarity.
 
 \begin{table}[t]
 \centering
@@ -245,9 +246,10 @@ normal data may still reduce detection power.
 
 DeepSentinel reframes sentinel-based dataset protection around a single
 principle: ownership evidence should be hidden in retrieval geometry rather than
-visible keys. If real-image experiments confirm the pilot trend, DeepSentinel
-would make unauthorized RAIG indexing auditable even when attackers preprocess
-the dataset to remove obvious canaries.
+visible keys. The current synthetic and COCO CLIP evidence supports this
+selection-only version of the idea: removing the latent sentinels by generic
+density filtering requires broad collateral damage, while visible or outlier
+sentinels are easier to discard.
 
 \bibliography{deepsentinel}
 
