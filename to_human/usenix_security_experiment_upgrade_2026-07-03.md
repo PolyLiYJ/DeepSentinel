@@ -10,10 +10,16 @@ New artifacts:
 
 - `experiments/H1_latent_in_distribution_sentinels/usenix_security_extension_protocol.md`
 - `src/usenix_security_summary.py`
+- `data/h1_raig_proxy_coco5k.csv`
+- `to_human/h1_raig_proxy_coco5k.svg`
 - `data/usenix_coco5k_attack_cost.csv`
 - `data/usenix_coco5k_trigger_power.csv`
 - `data/usenix_coco5k_false_match_calibration.csv`
 - `data/usenix_coco5k_experiment_gaps.csv`
+- `data/usenix_coco5k_exact_attack_cost.csv`
+- `data/usenix_coco5k_exact_trigger_power.csv`
+- `data/usenix_coco5k_exact_false_match_calibration.csv`
+- `data/usenix_coco5k_exact_experiment_gaps.csv`
 
 ## Current Strongest Security-Style Result
 
@@ -30,15 +36,21 @@ This is a good security-paper framing point: the adaptive filter can remove the
 obvious/outlier evidence, but only after it begins paying high normal-data cost,
 and the in-distribution latent sentinels remain detectable.
 
+## Exact Proxy Completed
+
+After the server came back online, the exact cache-based COCO-5k RAIG proxy was
+run on `Hulk` using the saved embedding cache. It matches the earlier aggregate
+estimate. At density drop 0.35 and `g=0.5`, DeepSentinel TPR is 0.9648 at FPR
+2.79e-05, while hidden-outlier TPR is 0.0.
+
 ## What Still Must Be Run for USENIX Security
 
-1. Exact COCO-5k RAIG proxy on the remote embedding cache.
-2. One real image-conditioned RAIG generation experiment.
-3. Stronger adaptive filters: OCR/text, CLIP outlier, density, dedup, and
+1. One real image-conditioned RAIG generation experiment.
+2. Stronger adaptive filters: OCR/text, CLIP outlier, density, dedup, and
    caption-image mismatch where metadata exists.
-4. Real utility damage: normal-query Recall@K, top-k similarity, retrieval
+3. Real utility damage: normal-query Recall@K, top-k similarity, retrieval
    diversity, and generation CLIPScore.
-5. One non-natural-image dataset, preferably Product-10K or an art/product
+4. One non-natural-image dataset, preferably Product-10K or an art/product
    substitute.
 
 ## Current Caveat

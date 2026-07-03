@@ -268,3 +268,20 @@
   hidden outliers but zero DeepSentinel samples; with `g=0.5`, threshold two,
   and eight triggers, aggregate DeepSentinel proxy TPR is 0.9648 at FPR
   2.79e-05.
+
+## 2026-07-03 Server Reconnect and Exact RAIG Proxy
+
+- User asked to retry the remote server. `ping` and `nc` showed
+  `10.21.4.20:22` reachable again.
+- Logged into `Hulk` as `yjli`; server uptime was 52 days and root filesystem
+  had about 210GB free.
+- Avoided `git pull` on the remote repo because it contains untracked COCO cache
+  artifacts that could conflict with tracked local artifacts.
+- Copied current evaluation scripts to `/tmp/deepsentinel_src` and ran exact
+  COCO-5k RAIG proxy against
+  `/home/yjli/DeepSentinel/data/h1_clip_coco5k_embeddings.pt`.
+- Pulled back `data/h1_raig_proxy_coco5k.csv` and
+  `to_human/h1_raig_proxy_coco5k.svg`.
+- Exact proxy matches the earlier aggregate estimate: at density drop 0.35 and
+  `g=0.5`, DeepSentinel TPR is 0.9648 at FPR 2.79e-05, while hidden-outlier TPR
+  is 0.0.

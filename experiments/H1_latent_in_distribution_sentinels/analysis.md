@@ -101,32 +101,33 @@ Manual inspection again shows ordinary COCO images. The key limitation remains
 semantic tightness: selection-only sentinels are plausible and filter-resistant,
 but some trigger matches are broad.
 
-## COCO-5k Aggregate RAIG Proxy
+## COCO-5k Exact and Aggregate RAIG Proxy
 
 While the SSH server holding the full COCO-5k embedding cache was unreachable,
-we ran an aggregate proxy from the saved filtering CSV. This estimate uses the
-reported DeepSentinel trigger hit@20 and treats hidden-outlier survival as if
-every surviving outlier were retrieved by its trigger, making the hidden-outlier
-baseline optimistic. It is not a replacement for the exact cache-based proxy in
-`src/raig_proxy_evidence.py`.
+we first ran an aggregate proxy from the saved filtering CSV. After reconnecting
+to `Hulk`, we ran the exact cache-based proxy with `src/raig_proxy_evidence.py`
+against `data/h1_clip_coco5k_embeddings.pt`. The exact results match the
+aggregate estimate, confirming that the fallback did not overstate the
+retrieval-side detection trend.
 
 Artifacts:
 
+- `data/h1_raig_proxy_coco5k.csv`
 - `data/h1_raig_proxy_coco5k_aggregate.csv`
+- `to_human/h1_raig_proxy_coco5k.svg`
 - `to_human/h1_raig_proxy_coco5k_aggregate.svg`
 
 With eight private triggers, detection threshold two, false visual match rate
-0.001 per query, and generation evidence retention `g=0.5`, the proxy false
-positive rate is 2.79e-05. DeepSentinel proxy TPR stays between 0.9375 and
-0.9648 across all pruning levels. The optimistic hidden-outlier proxy TPR is
+0.001 per query, and generation evidence retention `g=0.5`, the exact proxy
+false-positive rate is 2.79e-05. DeepSentinel exact proxy TPR stays between
+0.9375 and 0.9648 across all pruning levels. The hidden-outlier proxy TPR is
 0.9648 before pruning, 0.8125 at 20% pruning, 0.5 at 30% pruning, and 0.0 from
 35% pruning onward.
 
 Interpretation: even after a generation-side evidence dilution model, the COCO
 retrieval results imply high DeepSentinel ownership-test power at moderate
-generation retention. This strengthens the case for running the exact
-cache-based RAIG proxy, then a minimal image-conditioned generation experiment,
-once the server is reachable.
+generation retention. The exact proxy closes the prior cache-unavailability gap.
+The next missing layer is a minimal image-conditioned generation experiment.
 
 ## USENIX Security-Style Statistical Summary
 

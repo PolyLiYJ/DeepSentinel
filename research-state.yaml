@@ -4,7 +4,7 @@ question: >
   generation remain effective when an attacker filters visible key-bearing
   sentinel images?
 venue_target: USENIX Security
-status: usenix_extension_started
+status: exact_raig_proxy_complete
 created: 2026-06-13
 current_direction: >
   A single filter-resistant defense: distribution-preserving latent sentinels
@@ -48,7 +48,6 @@ metrics:
   - retrieval hit rate of sentinel trigger queries
   - RAIG utility change on non-trigger prompts
 next_steps:
-  - Run exact COCO-5k RAIG proxy on yjli@10.21.4.20 once SSH is reachable; current connection attempts time out.
   - Add real RAIG generation with one image-conditioned stack, keeping the defense unchanged.
   - Add stronger adaptive pre-index attacks: OCR/text, CLIP outlier, density, dedup, and caption-image mismatch where metadata exists.
   - Add real utility damage metrics: normal-query Recall@K, top-k similarity, retrieval diversity, and generation CLIPScore.
@@ -66,3 +65,4 @@ completed:
   - Tightened draft wording to consistently describe the current method as selection-only latent sentinel selection.
   - Aligned H1 state wording with the selection-only method and added an exact RAIG proxy runbook.
   - Added a USENIX Security extension protocol and local COCO-5k statistical summary tables.
+  - Reconnected to yjli@10.21.4.20 and ran the exact COCO-5k RAIG proxy from the embedding cache.

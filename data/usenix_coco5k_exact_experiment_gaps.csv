@@ -1,0 +1,6 @@
+requirement,current_status,needed_experiment,paper_risk_if_missing
+real_raig_generation,missing,SDXL+IP-Adapter or equivalent image-conditioned RAIG with generated-output evidence matching,retrieval-only evidence may not survive generation
+strong_adaptive_attacks,partial_density_attack_only,"OCR/text, CLIP outlier, density, dedup, caption-image mismatch, and calibrated attack budgets",attacker model may look underpowered
+larger_or_extra_datasets,COCO_1k_and_5k,Product-10K or another product/art domain plus larger natural-image subset,domain transfer and scale remain unproven
+utility_damage,normal_collateral_proxy,"normal-query Recall@K, top-k similarity, diversity, and generation CLIPScore under filtering",collateral damage may not equal real RAIG utility loss
+detection_statistics,aggregate_proxy_available,"exact TPR/FPR, confidence intervals, trigger-count power, false-positive calibration",ownership claim lacks security-style statistical calibration
