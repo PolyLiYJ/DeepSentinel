@@ -33,8 +33,9 @@ collateral-damage tradeoff, since filters aggressive enough to remove
 DeepSentinel samples also remove normal high-density data. A synthetic retrieval
 pilot and CLIP experiments on COCO validation subsets support this mechanism:
 selection-only latent sentinels survive density pruning that removes hidden
-outlier sentinels. An aggregate RAIG proxy further suggests that the ownership
-signal remains detectable under moderate generation-side evidence dilution.
+outlier sentinels. An exact cache-based RAIG proxy further shows that the
+ownership signal remains detectable under moderate generation-side evidence
+dilution.
 \end{abstract}
 
 \section{Introduction}
@@ -71,7 +72,8 @@ Our intended contribution is a focused defense and evaluation framework:
     \item We introduce distribution-preserving latent sentinels as a single
     replacement for visible key images.
     \item We evaluate whether removing latent sentinels requires high collateral
-    damage to normal images, using both retrieval-only and RAIG settings.
+    damage to normal images, using retrieval-only filtering and an exact RAIG
+    ownership-detection proxy.
 \end{itemize}
 
 \section{Threat Model}
@@ -166,14 +168,15 @@ pruning, while low-density trigger-aligned hidden outliers are eventually
 removed.}
 \end{table}
 
-\paragraph{Aggregate RAIG proxy.}
+\paragraph{Exact RAIG proxy.}
 We next approximate a retrieval-conditioned generation layer by assuming that a
 retrieved sentinel leaves auditable evidence in the output with probability
 $g$. With eight private triggers, a detection threshold of two positive
 evidences, and per-query false visual match rate 0.001, the proxy false-positive
 rate is $2.79\times 10^{-5}$. Table~\ref{tab:raig-proxy} reports the
-COCO-5k aggregate estimate at $g=0.5$. The hidden-outlier estimate is optimistic:
-it treats every surviving hidden outlier as retrieved by its trigger.
+COCO-5k exact cache-based proxy at $g=0.5$. This proxy recomputes per-trigger
+top-k retrieval from the saved COCO-5k CLIP embedding cache before applying the
+generation-evidence retention model.
 
 \begin{table}[t]
 \centering
@@ -190,20 +193,47 @@ Density drop & Outlier proxy TPR & Deep proxy TPR \\
 \bottomrule
 \end{tabular}
 \caption{Aggregate COCO-5k RAIG proxy at generation evidence retention
-$g=0.5$. DeepSentinel remains detectable after evidence dilution; the optimistic
+$g=0.5$. DeepSentinel remains detectable after evidence dilution; the
 hidden-outlier proxy collapses once filtering removes the outliers.}
 \label{tab:raig-proxy}
 \end{table}
 
+\paragraph{Detection calibration.}
+At the strongest point where hidden outliers are fully removed, density drop
+0.35, DeepSentinel retrieves all eight sentinels. Table~\ref{tab:detection-cal}
+shows the resulting detection calibration at $g=0.5$. With threshold two and
+eight triggers, DeepSentinel reaches TPR 0.965 at FPR $2.79\times 10^{-5}$; if
+the auditor raises the threshold to three, FPR drops to $5.58\times 10^{-8}$ and
+TPR remains 0.855.
+
+\begin{table}[t]
+\centering
+\small
+\begin{tabular}{lrrr}
+\toprule
+Triggers / threshold & FPR & Deep TPR & Outlier TPR \\
+\midrule
+4 / 2 & 5.99e-06 & 0.688 & 0.000 \\
+6 / 2 & 1.50e-05 & 0.891 & 0.000 \\
+8 / 2 & 2.79e-05 & 0.965 & 0.000 \\
+8 / 3 & 5.58e-08 & 0.855 & 0.000 \\
+\bottomrule
+\end{tabular}
+\caption{Detection calibration at density drop 0.35 and generation evidence
+retention $g=0.5$. DeepSentinel keeps ownership-test power even after all
+hidden-outlier sentinels have been filtered.}
+\label{tab:detection-cal}
+\end{table}
+
 \paragraph{Full evaluation plan.}
-The next experiments should replace the aggregate proxy with the exact
-cache-based proxy and then a minimal image-conditioned generation layer.
+The next experiments should add a minimal image-conditioned generation layer.
 Baselines include ImageSentinel-style visible key sentinels, conventional
 invisible watermarking, and no-sentinel controls. Attacks include OCR/text
-filtering, CLIP outlier filtering, local-density filtering, and deduplication.
-Metrics are ownership detection true-positive rate at fixed false-positive
-rate, sentinel survival, normal collateral damage, trigger retrieval hit rate,
-generation-side evidence, and non-trigger RAIG utility.
+filtering, CLIP outlier filtering, local-density filtering, deduplication, and
+caption-image mismatch filtering where metadata is available. Metrics are
+ownership detection true-positive rate at fixed false-positive rate, sentinel
+survival, normal retrieval utility, trigger retrieval hit rate, generation-side
+evidence, and non-trigger RAIG utility.
 
 \section{Related Work}
 
@@ -234,10 +264,11 @@ pipelines~\cite{glaze2023,mist2023}.
 
 The current evidence is strongest for filtering robustness, not precise semantic
 control. COCO contact sheets show visually ordinary selected sentinels, but some
-trigger-image matches are broad. Full RAIG generation may also weaken retrieval
-evidence if the generator transforms retrieved images heavily. Finally, a strong
-adversary who knows the exact encoder and is willing to remove substantial
-normal data may still reduce detection power.
+trigger-image matches are broad. The current RAIG layer is still a proxy:
+retrieval is exact, but generation-side evidence retention is modeled rather
+than produced by a real image-conditioned generator. Finally, a strong adversary
+who knows the exact encoder and is willing to remove substantial normal data may
+still reduce detection power.
 
 \section{Conclusion}
 
@@ -246,7 +277,9 @@ principle: ownership evidence should be hidden in retrieval geometry rather than
 visible keys. The current synthetic and COCO CLIP evidence supports this
 selection-only version of the idea: removing the latent sentinels by generic
 density filtering requires broad collateral damage, while visible or outlier
-sentinels are easier to discard.
+sentinels are easier to discard. The exact COCO-5k RAIG proxy further shows that
+this retrieval advantage can translate into high-confidence ownership detection
+under moderate generation-side evidence dilution.
 
 \bibliographystyle{plain}
 \bibliography{deepsentinel}
