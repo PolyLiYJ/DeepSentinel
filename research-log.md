@@ -236,3 +236,15 @@
   combined select-or-optimize defense.
 - Updated the conclusion to state that the current evidence already supports
   the selection-only version on synthetic and COCO CLIP filtering tests.
+
+## 2026-07-03 Resume: Exact Proxy Runbook
+
+- Resumed after the user explicitly asked to continue the research.
+- Re-read `research-state.yaml`, `findings.md`, and the autoresearch skill.
+- Confirmed the repository still has one local commit ahead of GitHub because
+  `github.com:443` is unreachable from the current network.
+- Checked `10.21.4.20:22`; the SSH port probe timed out, so the exact COCO-5k
+  RAIG proxy cannot be launched yet.
+- Aligned the H1 prediction in `research-state.yaml` with the current
+  selection-only method and added an exact COCO-5k RAIG proxy runbook to
+  `experiments/H1_latent_in_distribution_sentinels/raig_proxy_protocol.md`.

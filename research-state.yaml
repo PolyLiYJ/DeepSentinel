@@ -21,9 +21,9 @@ hypotheses:
     status: active
     prediction: >
       Compared with visible random-key sentinel images, latent sentinels that are
-      chosen from high-density regions and shifted only within a constrained
-      retrieval embedding budget will survive text-key and outlier filters unless
-      the attacker removes many normal images.
+      chosen from high-density regions with relatively high private-trigger
+      similarity will survive text-key and outlier filters unless the attacker
+      removes many normal images.
     experiment_dir: experiments/H1_latent_in_distribution_sentinels
 datasets_planned:
   pilot:
@@ -62,3 +62,4 @@ completed:
   - Added COCO-5k filtering and aggregate RAIG proxy result tables to the AAAI draft.
   - Wrote a 2026-06-24 human progress snapshot focused on the single-scheme AAAI story and next exact RAIG proxy step.
   - Tightened draft wording to consistently describe the current method as selection-only latent sentinel selection.
+  - Aligned H1 state wording with the selection-only method and added an exact RAIG proxy runbook.
