@@ -66,6 +66,19 @@ This does not replace the exact cache-based proxy, but it suggests that the
 retrieval-only advantage should remain meaningful after moderate generation-side
 evidence dilution.
 
+## USENIX Security Readiness Finding
+
+A local USENIX-style summary was added on top of the saved COCO-5k artifacts.
+At density drop 0.35, the attacker removes 35% of normal images, all
+hidden-outlier sentinels, and zero DeepSentinel samples. With `g=0.5`, threshold
+two, eight private triggers, and false match rate 0.001, the aggregate proxy has
+DeepSentinel TPR 0.9648 and FPR 2.79e-05, while the hidden-outlier proxy is 0.0.
+
+This strengthens the statistical framing but also exposes the USENIX Security
+gaps clearly: the current utility metric is still a count proxy, the trigger set
+is small enough that confidence intervals are wide, and the generation layer is
+still simulated rather than a real RAIG system.
+
 ## Candidate Ideas Considered
 
 1. Natural-language semantic keys instead of random strings.
@@ -103,6 +116,8 @@ forces an adaptive attacker to pay high collateral damage to remove the evidence
   survival and hit@20, but semantic tightness is still open.
 - Does the effect transfer from retrieval-only evaluation to full RAIG systems
   such as SDXL+IP-Adapter or OmniGen-style pipelines?
+- Can the attack-cost curve be reproduced with real normal-query retrieval
+  utility rather than only fraction of normal images removed?
 - As an intermediate step, does a simple RAIG proxy still yield high ownership
   TPR when retrieved sentinel evidence is only preserved with probability 0.25
   to 1.0 in generated outputs? The aggregate COCO-5k estimate is positive, but

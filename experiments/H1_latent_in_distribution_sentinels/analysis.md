@@ -128,6 +128,59 @@ generation retention. This strengthens the case for running the exact
 cache-based RAIG proxy, then a minimal image-conditioned generation experiment,
 once the server is reachable.
 
+## USENIX Security-Style Statistical Summary
+
+To make the current COCO-5k evidence closer to a security-paper evaluation, we
+added a local summary script:
+
+```bash
+python3 src/usenix_security_summary.py \
+  --filtering-csv data/h1_clip_coco5k_filtering.csv \
+  --proxy-csv data/h1_raig_proxy_coco5k_aggregate.csv \
+  --out-prefix data/usenix_coco5k
+```
+
+Artifacts:
+
+- `data/usenix_coco5k_attack_cost.csv`
+- `data/usenix_coco5k_trigger_power.csv`
+- `data/usenix_coco5k_false_match_calibration.csv`
+- `data/usenix_coco5k_experiment_gaps.csv`
+
+Attack-cost view: at density drop 0.35, the attacker removes 35% of normal
+images, removing all hidden-outlier sentinels but zero DeepSentinel samples. The
+current utility-retained proxy is therefore 0.65. This is still only a count
+proxy; USENIX Security will need normal-query retrieval and generation utility
+measurements to show real system damage.
+
+Confidence intervals: because the current private trigger set has only eight
+sentinels, Wilson 95% intervals are necessarily wide. For example, 8/8
+DeepSentinel survival has a 95% Wilson interval of roughly 0.676--1.0, while
+0/8 hidden-outlier survival at density drop 0.35 has an upper bound of roughly
+0.324. This motivates adding more triggers in the full security evaluation.
+
+Trigger-count sensitivity at density drop 0.35 and generation retention `g=0.5`
+shows the expected detection-power tradeoff. With threshold two and false match
+rate 0.001, DeepSentinel proxy TPR rises from 0.25 with two triggers to 0.965
+with eight triggers, while proxy FPR remains 2.79e-05 at eight triggers. The
+hidden-outlier proxy is 0.0 at this pruning level because all outlier sentinels
+were removed.
+
+False-match calibration at density drop 0.35, threshold two, and `g=0.5` shows
+DeepSentinel proxy TPR remains 0.965 while FPR changes with the assumed
+per-query false visual match rate:
+
+| False match rate | Proxy FPR | Deep proxy TPR | Hidden-outlier proxy TPR |
+|---:|---:|---:|---:|
+| 0.0001 | 2.80e-07 | 0.965 | 0.000 |
+| 0.0010 | 2.79e-05 | 0.965 | 0.000 |
+| 0.0100 | 2.69e-03 | 0.965 | 0.000 |
+
+Current USENIX gaps are now explicit in
+`data/usenix_coco5k_experiment_gaps.csv`: real RAIG generation, stronger
+adaptive attacks, larger or non-natural-image datasets, real utility damage,
+and exact detection statistics.
+
 ## Next Experimental Step
 
 Move from retrieval-only CLIP evaluation to a minimal RAIG-layer check:

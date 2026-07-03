@@ -248,3 +248,23 @@
 - Aligned the H1 prediction in `research-state.yaml` with the current
   selection-only method and added an exact COCO-5k RAIG proxy runbook to
   `experiments/H1_latent_in_distribution_sentinels/raig_proxy_protocol.md`.
+
+## 2026-07-03 USENIX Security Extension
+
+- User requested strengthening the current experiments for USENIX Security:
+  real RAIG generation, stronger adaptive attacks, larger datasets, utility
+  damage, and full detection statistics.
+- Added `experiments/H1_latent_in_distribution_sentinels/usenix_security_extension_protocol.md`
+  to lock the expanded evaluation matrix while keeping the defense
+  selection-only.
+- Added `src/usenix_security_summary.py` and ran it on the saved COCO-5k
+  filtering and aggregate RAIG proxy CSVs.
+- Generated local USENIX summary artifacts:
+  `data/usenix_coco5k_attack_cost.csv`,
+  `data/usenix_coco5k_trigger_power.csv`,
+  `data/usenix_coco5k_false_match_calibration.csv`, and
+  `data/usenix_coco5k_experiment_gaps.csv`.
+- Key current point: at density drop 0.35, 35% normal collateral removes all
+  hidden outliers but zero DeepSentinel samples; with `g=0.5`, threshold two,
+  and eight triggers, aggregate DeepSentinel proxy TPR is 0.9648 at FPR
+  2.79e-05.

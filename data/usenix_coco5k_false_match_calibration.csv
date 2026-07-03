@@ -1,0 +1,4 @@
+density_drop,generation_retention,threshold,false_match_rate,proxy_fpr,deep_proxy_tpr,hidden_outlier_proxy_tpr
+0.35,0.5,2,0.0001,2.798880209977602e-07,0.96484375,0.0
+0.35,0.5,2,0.001,2.788820977613995e-05,0.96484375,0.0
+0.35,0.5,2,0.01,0.0026900777395207,0.96484375,0.0
